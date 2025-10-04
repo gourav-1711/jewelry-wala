@@ -1,10 +1,20 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaHeart, FaShoppingBag, FaUser, FaSearch, FaBars, FaTimes } from "react-icons/fa";
 
 export default function Header() {
   const [isOffcanvasOpen, setIsOffcanvasOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const categories = [
     "Necklace Set",
@@ -21,19 +31,23 @@ export default function Header() {
 
   return (
     <>
-      {/* Top Bar - Not Sticky */}
-      <div className="text-center lg:text-[14px] md:text-[12px] bg-gray-600 text-white text-sm py-1">
-        Free shipping on orders of 6 items or more
+      {/* Top Bar - Hidden when scrolled */}
+      <div className={`text-center lg:text-[14px] md:text-[12px] bg-gray-600 text-white text-sm py-1 transition-all duration-300 ${
+        isScrolled ? 'opacity-0 h-0 overflow-hidden' : 'opacity-100'
+      }`}>
+       Welcome to Jewellery Wala
       </div>
 
       {/* Main Header - Sticky */}
       <header className="border-b bg-white shadow-sm sticky top-0 z-50">
         {/* Main Header */}
-        <div className="flex items-center justify-between px-4 md:px-6 py-4">
+        <div className={`flex items-center justify-between px-4 md:px-6 py-4 transition-all duration-300 ${
+          isScrolled ? 'py-2' : 'py-4'
+        }`}>
           {/* Mobile Burger Menu */}
           <div className="md:hidden">
-            <FaBars 
-              size={24} 
+            <FaBars
+              size={24}
               className="cursor-pointer hover:text-yellow-700 transition-colors"
               onClick={() => setIsOffcanvasOpen(true)}
             />
@@ -41,14 +55,18 @@ export default function Header() {
 
           {/* Logo */}
           <h1
-            className="text-2xl md:text-3xl font-[mono] font-bold"
+            className={`font-[mono] font-bold transition-all duration-300 ${
+              isScrolled ? 'text-xl md:text-2xl' : 'text-2xl md:text-3xl'
+            }`}
             style={{ color: "#D4AF37" }}
           >
             Jewellery Wala
           </h1>
 
           {/* Search - Desktop */}
-          <div className="flex-1 px-6 hidden md:block">
+          <div className={`flex-1 px-6 hidden md:block transition-all duration-300 ${
+            isScrolled ? 'opacity-50' : 'opacity-100'
+          }`}>
             <div className="relative w-full max-w-md mx-auto">
               <input
                 type="text"
@@ -62,12 +80,12 @@ export default function Header() {
           {/* Right Icons */}
           <div className="flex items-center space-x-3 md:space-x-5">
             <FaHeart size={20} className="hidden md:block cursor-pointer hover:text-yellow-700 transition-colors" />
-            <FaShoppingBag 
-              size={20} 
+            <FaShoppingBag
+              size={20}
               className="hidden md:block cursor-pointer hover:text-yellow-700 transition-colors"
             />
-            <FaSearch 
-              size={20} 
+            <FaSearch
+              size={20}
               className="cursor-pointer hover:text-yellow-700 transition-colors lg:hidden"
               onClick={() => setIsSearchOpen(!isSearchOpen)}
             />
@@ -93,13 +111,15 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Categories - Desktop */}
-        <nav className="hidden md:flex justify-center space-x-6 py-2 font-medium text-sm overflow-x-auto">
+        {/* Categories - Hidden when scrolled */}
+        <nav className={`hidden md:flex justify-center space-x-6 py-2 font-medium text-sm overflow-x-auto transition-all duration-300 ${
+          isScrolled ? 'opacity-0 h-0 py-0' : 'opacity-100 py-2'
+        }`}>
           {categories.map((cat, idx) => (
-            <a 
-              key={idx} 
-              href="#" 
-              className="relative hover:text-yellow-700 transition-colors whitespace-nowrap pb-1 group"
+            <a
+              key={idx}
+              href="#"
+              className="relative hover:text-yellow-700 transition-colors hover:scale-105 hover:shadow-2xl text-[16px] whitespace-nowrap pb-1 group"
             >
               {cat}
               <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-yellow-700 transition-all duration-300 ease-out group-hover:w-full group-hover:left-0"></span>

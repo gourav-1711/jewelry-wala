@@ -57,7 +57,7 @@ export default function Banner() {
   return (
     <>
       <div className='w-full h-auto relative overflow-hidden group'>
-        <div className='relative w-full h-[250px] sm:h-[300px] md:h-[350px] lg:h-[400px] xl:h-[450px]'>
+        <div className='relative w-full h-[250px] sm:h-[300px] md:h-[350px] lg:h-[400px] xl:h-[550px]'>
           {/* Slider Container */}
           <div
             className='flex transition-transform duration-500 ease-in-out h-full'
@@ -81,23 +81,23 @@ export default function Banner() {
           {/* Left Arrow */}
           <button
             onClick={prevSlide}
-            className='absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white p-2 rounded-full shadow-lg transition-all duration-300'
+            className='absolute left-2 sm:left-4  top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white p-2 lg:block hidden rounded-full shadow-lg transition-all duration-300'
             aria-label="Previous slide"
           >
-            <FaChevronLeft className='text-gray-800 text-base sm:text-lg' />
+            <FaChevronLeft className='text-gray-800 text-base hidden lg:block ' />
           </button>
 
           {/* Right Arrow */}
           <button
             onClick={nextSlide}
-            className='absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white p-2 rounded-full shadow-lg transition-all duration-300'
+            className='absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white p-2 lg:block hidden rounded-full shadow-lg transition-all duration-300'
             aria-label="Next slide"
           >
-            <FaChevronRight className='text-gray-800 text-base sm:text-lg' />
+            <FaChevronRight className='text-gray-800 text-base hidden lg:block ' />
           </button>
 
           {/* Navigation Dots */}
-          <div className='absolute bottom-2 sm:bottom-4 left-1/2 transform -translate-x-1/2 flex gap-1.5 sm:gap-2 z-10'>
+          {/* <div className='absolute bottom-2 sm:bottom-4 left-1/2 transform -translate-x-1/2 flex gap-1.5 sm:gap-2 z-10'>
             {banners.map((_, index) => (
               <button
                 key={index}
@@ -110,7 +110,7 @@ export default function Banner() {
                 aria-label={`Go to slide ${index + 1}`}
               />
             ))}
-          </div>
+          </div> */}
         </div>
       </div>
     </>
