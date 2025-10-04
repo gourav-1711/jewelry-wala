@@ -8,7 +8,7 @@ const SilverCollection = () => {
     ];
 
     return (
-        <div className="w-full mt-5 bg-gradient-to-br from-slate-50 via-gray-50 to-zinc-50 py-5">
+        <div className="w-full bg-gradient-to-br from-slate-50 via-gray-50 to-zinc-50 py-5">
             {/* Decorative top border */}
             <div className="max-w-6xl mx-auto">
                 <div className="h-px bg-gradient-to-r from-transparent via-slate-300 to-transparent mb-2"></div>
@@ -22,7 +22,7 @@ const SilverCollection = () => {
                 </div>
 
                 {/* Products Grid */}
-                <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <div className="grid grid-cols-2 px-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                     {products.map((item) => (
                         <div
                             key={item.id}
