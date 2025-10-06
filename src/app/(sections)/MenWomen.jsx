@@ -28,7 +28,7 @@ export default function GenderCategorySection() {
   };
 
   return (
-    <div className="w-full bg-gray-50 py-10">
+    <div className="w-full bg-gray-50 py-12">
       {/* Top Section */}
       <div className="flex flex-col md:flex-row justify-center items-center gap-10 max-w-6xl mx-auto px-6">
         {/* Men */}

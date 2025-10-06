@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import { FaHeart, FaShoppingBag, FaUser, FaSearch, FaBars, FaTimes } from "react-icons/fa";
 
@@ -32,18 +33,16 @@ export default function Header() {
   return (
     <>
       {/* Top Bar - Hidden when scrolled */}
-      <div className={`text-center lg:text-[14px] md:text-[12px] bg-gray-600 text-white text-sm py-1 transition-all duration-300 ${
-        isScrolled ? 'opacity-0 h-0 overflow-hidden' : 'opacity-100'
-      }`}>
-       Welcome to Jewellery Wala
+      <div className={`text-center lg:text-[14px] md:text-[12px] bg-gray-600 text-white text-sm py-1 transition-all duration-300 ${isScrolled ? 'opacity-0 h-0 overflow-hidden' : 'opacity-100'
+        }`}>
+        Welcome to Jewellery Wala
       </div>
 
       {/* Main Header - Sticky */}
       <header className="border-b bg-white shadow-sm sticky top-0 z-50">
         {/* Main Header */}
-        <div className={`flex items-center justify-between px-4 md:px-6 py-4 transition-all duration-300 ${
-          isScrolled ? 'py-2' : 'py-4'
-        }`}>
+        <div className={`flex items-center justify-between px-4 md:px-6 py-4 transition-all duration-300 ${isScrolled ? 'py-2' : 'py-4'
+          }`}>
           {/* Mobile Burger Menu */}
           <div className="md:hidden">
             <FaBars
@@ -55,7 +54,7 @@ export default function Header() {
 
           {/* Logo */}
           <h1
-            className={`font-[mono] font-bold transition-all duration-300 ${
+            className={`font-[cursive] font-bold transition-all duration-300 ${
               isScrolled ? 'text-xl md:text-2xl' : 'text-2xl md:text-3xl'
             }`}
             style={{ color: "#D4AF37" }}
@@ -63,10 +62,11 @@ export default function Header() {
             Jewellery Wala
           </h1>
 
+          {/* <Image src="/images/logo.png" alt="Logo" width={150} height={100} /> */}
+
           {/* Search - Desktop */}
-          <div className={`flex-1 px-6 hidden md:block transition-all duration-300 ${
-            isScrolled ? 'opacity-50' : 'opacity-100'
-          }`}>
+          <div className={`flex-1 px-6 hidden md:block transition-all duration-300 ${isScrolled ? 'opacity-50' : 'opacity-100'
+            }`}>
             <div className="relative w-full max-w-md mx-auto">
               <input
                 type="text"
@@ -95,9 +95,8 @@ export default function Header() {
 
         {/* Mobile Search Dropdown */}
         <div
-          className={`overflow-hidden transition-all duration-300 ease-in-out ${
-            isSearchOpen ? "max-h-20 opacity-100" : "max-h-0 opacity-0"
-          }`}
+          className={`overflow-hidden transition-all duration-300 ease-in-out ${isSearchOpen ? "max-h-20 opacity-100" : "max-h-0 opacity-0"
+            }`}
         >
           <div className="px-4 pb-4 lg:hidden">
             <div className="relative">
@@ -112,14 +111,13 @@ export default function Header() {
         </div>
 
         {/* Categories - Hidden when scrolled */}
-        <nav className={`hidden md:flex justify-center space-x-6 py-2 font-medium text-sm overflow-x-auto transition-all duration-300 ${
-          isScrolled ? 'opacity-0 h-0 py-0' : 'opacity-100 py-2'
-        }`}>
+        <nav className={`hidden md:flex justify-center font-medium  space-x-6 py-2  text-sm overflow-x-auto transition-all duration-300 ${isScrolled ? 'opacity-0 h-0 py-0' : 'opacity-100 py-2'
+          }`}>
           {categories.map((cat, idx) => (
             <a
               key={idx}
               href="#"
-              className="relative hover:text-yellow-700 transition-colors hover:scale-105 hover:shadow-2xl text-[16px] whitespace-nowrap pb-1 group"
+              className="relative hover:text-yellow-700 transition-colors hover:scale-105 hover:shadow-2xl text-[16px] font-serif whitespace-nowrap pb-1 group"
             >
               {cat}
               <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-yellow-700 transition-all duration-300 ease-out group-hover:w-full group-hover:left-0"></span>
@@ -130,17 +128,15 @@ export default function Header() {
 
       {/* Backdrop Overlay with Blur */}
       <div
-        className={`fixed inset-0 bg-black/50 backdrop-blur-sm z-[60] transition-opacity duration-300 ${
-          isOffcanvasOpen ? "opacity-100 visible" : "opacity-0 invisible"
-        }`}
+        className={`fixed inset-0 bg-black/50 backdrop-blur-sm z-[60] transition-opacity duration-300 ${isOffcanvasOpen ? "opacity-100 visible" : "opacity-0 invisible"
+          }`}
         onClick={() => setIsOffcanvasOpen(false)}
       />
 
       {/* Left Side Offcanvas */}
       <div
-        className={`fixed top-0 left-0 h-full w-80 bg-white shadow-2xl z-[70] transform transition-transform duration-300 ease-in-out ${
-          isOffcanvasOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
+        className={`fixed top-0 left-0 h-full w-80 bg-white shadow-2xl z-[70] transform transition-transform duration-300 ease-in-out ${isOffcanvasOpen ? "translate-x-0" : "-translate-x-full"
+          }`}
       >
         {/* Offcanvas Header */}
         <div className="flex items-center justify-between p-4 border-b">

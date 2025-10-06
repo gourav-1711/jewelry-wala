@@ -10,7 +10,7 @@ const ShopByPrice = () => {
   ];
 
   return (
-    <div className="w-full my-8 px-4 py-8 bg-gradient-to-br from-pink-50 via-pink-25 to-purple-50  shadow-lg">
+    <div className="w-full px-4 py-8 bg-gradient-to-br from-pink-50 via-pink-25 to-purple-50  shadow-lg">
       <h2 className="text-3xl font-serif mb-8 text-center text-purple-800 relative">
         Shop by Price
         <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-pink-400 to-purple-400 rounded-full"></div>

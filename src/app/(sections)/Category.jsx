@@ -41,7 +41,7 @@ export default function RoundCategorySlider() {
         <div className="absolute bottom-[-12px] left-1/2 transform -translate-x-1/2 w-[60%] h-[2px] bg-gradient-to-r from-transparent via-yellow-300 to-transparent"></div>
       </h2>
     </div>
-      <div className="max-w-[1300px] mx-auto py-3 mb-10">
+      <div className="max-w-[1300px] mx-auto py-3 mb-5">
         <Slider {...settings}>
           {data.map((v) => (
             <div key={v.id} className="flex flex-col items-center justify-center px-3 py-2 group cursor-pointer">
