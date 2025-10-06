@@ -8,13 +8,13 @@ const SilverCollection = () => {
     ];
 
     return (
-        <div className="w-full bg-gradient-to-br from-slate-50 via-gray-50 to-zinc-50 py-5">
-            {/* Decorative top border */}
+        <div className="w-full bg-gradient-to-br from-slate-50 via-gray-50 to-zinc-50 py-8">
             <div className="max-w-6xl mx-auto">
-                <div className="h-px bg-gradient-to-r from-transparent via-slate-300 to-transparent mb-2"></div>
+                {/* Decorative top border */}
+                <div className="h-px bg-gradient-to-r from-transparent via-slate-300 to-transparent mb-4"></div>
 
                 {/* Heading Section */}
-                <div className="text-center mb-4">
+                <div className="text-center mb-6">
                     <h2 className="text-3xl font-serif text-slate-800 mb-3 tracking-wide">
                         New Arrival
                     </h2>
@@ -22,18 +22,18 @@ const SilverCollection = () => {
                 </div>
 
                 {/* Products Grid */}
-                <div className="grid grid-cols-2 px-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-2">
                     {products.map((item) => (
                         <div
                             key={item.id}
                             className="group bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer
                          border border-slate-200 hover:border-slate-300 overflow-hidden hover:-translate-y-1"
                         >
-                            <div className="p-4">
+                            <div className="p-3">
                                 <img
                                     src={item.img}
                                     alt={item.name}
-                                    className="w-full h-36 object-cover rounded-lg mb-3 group-hover:scale-105 transition-transform duration-300"
+                                    className="w-full h-44 md:h-48 object-cover rounded-lg mb-3 group-hover:scale-105 transition-transform duration-300"
                                 />
                                 <div className="text-center">
                                     <p className="text-slate-700 font-semibold text-base mb-1 group-hover:text-slate-900 transition-colors">
@@ -51,11 +51,11 @@ const SilverCollection = () => {
                 </div>
 
                 {/* Decorative bottom border */}
-                <div className="h-px bg-gradient-to-r from-transparent via-slate-300 to-transparent mt-5 mb-6"></div>
+                <div className="h-px bg-gradient-to-r from-transparent via-slate-300 to-transparent mt-6 mb-6"></div>
 
                 {/* View More Button */}
                 <div className="flex justify-center">
-                    <button className="px-6 py-2.5 bg-gradient-to-r from-slate-700 to-slate-800 text-white rounded-lg
+                    <button className="px-6 py-3 bg-gradient-to-r from-slate-700 to-slate-800 text-white rounded-lg
                              hover:from-slate-800 hover:to-slate-900 hover:shadow-md hover:-translate-y-0.5
                              transition-all duration-300 font-semibold text-base tracking-wide">
                         Explore More Collection

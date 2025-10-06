@@ -22,24 +22,24 @@ const SilverCollection = () => {
                 </div>
 
                 {/* Products Grid */}
-                <div className="grid grid-cols-2 sm:grid-cols-2 px-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <div className="grid grid-cols-2 sm:grid-cols-2 px-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
                     {products.map((item) => (
                         <div
                             key={item.id}
                             className="group bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer
                          border border-slate-200 hover:border-slate-300 overflow-hidden hover:-translate-y-1"
                         >
-                            <div className="p-4">
+                            <div className="p-2"> {/* Reduced padding */}
                                 <img
                                     src={item.img}
                                     alt={item.name}
-                                    className="w-full h-36 object-cover rounded-lg mb-3 group-hover:scale-105 transition-transform duration-300"
+                                    className="w-full h-44 md:h-48 object-cover rounded-lg mb-2 group-hover:scale-105 transition-transform duration-300"
                                 />
                                 <div className="text-center">
-                                    <p className="text-slate-700 font-semibold text-base mb-1 group-hover:text-slate-900 transition-colors">
+                                    <p className="text-slate-700 font-semibold text-sm mb-1 group-hover:text-slate-900 transition-colors">
                                         {item.name}
                                     </p>
-                                    <p className="text-lg font-bold text-slate-900 mb-2">
+                                    <p className="text-base font-bold text-slate-900 mb-2">
                                         {item.price}
                                     </p>
                                     <div className="w-0 h-0.5 bg-gradient-to-r from-slate-400 to-slate-600 mx-auto rounded-full

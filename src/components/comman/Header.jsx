@@ -1,53 +1,90 @@
 "use client";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { FaHeart, FaShoppingBag, FaUser, FaSearch, FaBars, FaTimes } from "react-icons/fa";
+import {
+  FaHeart,
+  FaShoppingBag,
+  FaUser,
+  FaSearch,
+  FaBars,
+  FaTimes,
+  FaChevronDown,
+} from "react-icons/fa";
 
 export default function Header() {
   const [isOffcanvasOpen, setIsOffcanvasOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [showMegaMenu, setShowMegaMenu] = useState(false);
+  const [mobileDropdownOpen, setMobileDropdownOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Prevent body scroll when offcanvas open
+  useEffect(() => {
+    document.body.style.overflow = isOffcanvasOpen ? "hidden" : "auto";
+  }, [isOffcanvasOpen]);
+
   const categories = [
-    "Necklace Set",
-    "Earrings",
-    "Bangles",
-    "Chain Pendant",
-    "Finger Ring",
-    "Hand Bag",
-    "Men's Bracelet",
-    "Juda",
-    "Saree Pin",
-    "Hathpans",
+    "Home",
+    "Shop By Category",
+    "New Arrivals",
+    "Gift Items",
+    "Track Your Order",
+    "Sale",
+    "Contact Us",
+  ];
+
+  const megaCategories = [
+    {
+      title: "Necklaces",
+      items: ["Gold", "Diamond", "Silver", "Pearl", "Choker", "Pendant"],
+    },
+    {
+      title: "Earrings",
+      items: ["Stud", "Hoops", "Jhumka", "Drop", "Danglers"],
+    },
+    {
+      title: "Rings",
+      items: ["Gold Rings", "Silver Rings", "Diamond Rings", "Engagement"],
+    },
+    {
+      title: "Bracelets",
+      items: ["Bangles", "Kada", "Chain", "Cuff"],
+    },
+    {
+      title: "Bridal",
+      items: ["Sets", "Maang Tikka", "Nath", "Payal"],
+    },
   ];
 
   return (
     <>
-      {/* Top Bar - Hidden when scrolled */}
-      <div className={`text-center lg:text-[14px] md:text-[12px] bg-gray-600 text-white text-sm py-1 transition-all duration-300 ${isScrolled ? 'opacity-0 h-0 overflow-hidden' : 'opacity-100'
-        }`}>
-        Welcome to Jewellery Wala
+      {/* Top Bar */}
+      <div
+        className={`text-center bg-gray-600 text-white text-sm py-1 transition-all duration-300 ${
+          isScrolled ? "opacity-0 h-0 overflow-hidden" : "opacity-100"
+        }`}
+      >
+        Free Shipping above ₹2000 | Welcome to Jewellery Wala
       </div>
 
-      {/* Main Header - Sticky */}
+      {/* Header */}
       <header className="border-b bg-white shadow-sm sticky top-0 z-50">
-        {/* Main Header */}
-        <div className={`flex items-center justify-between px-4 md:px-6 py-4 transition-all duration-300 ${isScrolled ? 'py-2' : 'py-4'
-          }`}>
-          {/* Mobile Burger Menu */}
+        <div
+          className={`flex items-center justify-between px-4 md:px-6 transition-all duration-300 ${
+            isScrolled ? "py-2" : "py-4"
+          }`}
+        >
+          {/* Mobile Menu Button */}
           <div className="md:hidden">
             <FaBars
               size={24}
-              className="cursor-pointer hover:text-yellow-700 transition-colors"
+              className="cursor-pointer hover:text-yellow-700"
               onClick={() => setIsOffcanvasOpen(true)}
             />
           </div>
@@ -55,18 +92,15 @@ export default function Header() {
           {/* Logo */}
           <h1
             className={`font-[cursive] font-bold transition-all duration-300 ${
-              isScrolled ? 'text-xl md:text-2xl' : 'text-2xl md:text-3xl'
+              isScrolled ? "text-xl md:text-2xl" : "text-2xl md:text-3xl"
             }`}
             style={{ color: "#D4AF37" }}
           >
             Jewellery Wala
           </h1>
 
-          {/* <Image src="/images/logo.png" alt="Logo" width={150} height={100} /> */}
-
-          {/* Search - Desktop */}
-          <div className={`flex-1 px-6 hidden md:block transition-all duration-300 ${isScrolled ? 'opacity-50' : 'opacity-100'
-            }`}>
+          {/* Desktop Search */}
+          <div className="hidden md:block flex-1 px-6">
             <div className="relative w-full max-w-md mx-auto">
               <input
                 type="text"
@@ -77,104 +111,188 @@ export default function Header() {
             </div>
           </div>
 
-          {/* Right Icons */}
+          {/* Icons */}
           <div className="flex items-center space-x-3 md:space-x-5">
-            <FaHeart size={20} className="hidden md:block cursor-pointer hover:text-yellow-700 transition-colors" />
+            <FaHeart size={20} className="hidden md:block cursor-pointer hover:text-yellow-700" />
             <FaShoppingBag
               size={20}
-              className="hidden md:block cursor-pointer hover:text-yellow-700 transition-colors"
+              className="hidden md:block cursor-pointer hover:text-yellow-700"
             />
             <FaSearch
               size={20}
-              className="cursor-pointer hover:text-yellow-700 transition-colors lg:hidden"
+              className="cursor-pointer hover:text-yellow-700 lg:hidden"
               onClick={() => setIsSearchOpen(!isSearchOpen)}
             />
-            <FaUser size={20} className="cursor-pointer hover:text-yellow-700 transition-colors" />
+            <FaUser size={20} className="cursor-pointer hover:text-yellow-700" />
           </div>
         </div>
 
-        {/* Mobile Search Dropdown */}
+        {/* Mobile Search */}
         <div
-          className={`overflow-hidden transition-all duration-300 ease-in-out ${isSearchOpen ? "max-h-20 opacity-100" : "max-h-0 opacity-0"
-            }`}
+          className={`overflow-hidden transition-all duration-300 ${
+            isSearchOpen ? "max-h-20 opacity-100" : "max-h-0 opacity-0"
+          }`}
         >
           <div className="px-4 pb-4 lg:hidden">
             <div className="relative">
               <input
                 type="text"
                 placeholder="Search for products"
-                className="w-full border rounded-md px-4 py-2 my-2 focus:outline-none focus:ring-2 focus:ring-yellow-600"
+                className="w-full border rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-600"
               />
-              <FaSearch className="absolute right-3 top-5 text-gray-500" />
+              <FaSearch className="absolute right-3 top-3 text-gray-500" />
             </div>
           </div>
         </div>
 
-        {/* Categories - Hidden when scrolled */}
-        <nav className={`hidden md:flex justify-center font-medium  space-x-6 py-2  text-sm overflow-x-auto transition-all duration-300 ${isScrolled ? 'opacity-0 h-0 py-0' : 'opacity-100 py-2'
-          }`}>
+        {/* Desktop Categories */}
+        <nav
+          className={`hidden md:flex justify-center font-medium space-x-6 text-sm transition-all duration-300 ${
+            isScrolled ? "opacity-0 h-0" : "opacity-100 py-2"
+          }`}
+        >
           {categories.map((cat, idx) => (
-            <a
-              key={idx}
-              href="#"
-              className="relative hover:text-yellow-700 transition-colors hover:scale-105 hover:shadow-2xl text-[16px] font-serif whitespace-nowrap pb-1 group"
-            >
-              {cat}
-              <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-yellow-700 transition-all duration-300 ease-out group-hover:w-full group-hover:left-0"></span>
-            </a>
+            <div key={idx} className="relative group">
+              <a
+                href="#"
+                className={`relative hover:text-yellow-700 transition-colors text-[15px] font-serif whitespace-nowrap pb-1 ${
+                  cat === "Shop By Category" ? "text-gray-700" : "text-gray-600"
+                }`}
+                onMouseEnter={() =>
+                  cat === "Shop By Category" && setShowMegaMenu(true)
+                }
+                onClick={(e) => {
+                  if (cat === "Shop By Category") {
+                    e.preventDefault();
+                    setShowMegaMenu((prev) => !prev);
+                  }
+                }}
+              >
+                {cat}
+                {cat === "Shop By Category" && (
+                  <FaChevronDown className="inline ml-1 text-xs" />
+                )}
+                <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-yellow-700 transition-all duration-300 ease-out group-hover:w-full group-hover:left-0"></span>
+              </a>
+
+              {/* Mega Menu */}
+              {cat === "Shop By Category" && showMegaMenu && (
+                <div
+                  onMouseEnter={() => setShowMegaMenu(true)}
+                  onMouseLeave={() => setShowMegaMenu(false)}
+                  className="absolute left-1/2 -translate-x-1/2 top-full w-[900px] bg-white shadow-2xl rounded-lg p-6 mt-4 grid grid-cols-5 gap-6 backdrop-blur-sm border border-gray-100 animate-fadeIn"
+                >
+                  {megaCategories.map((menu, i) => (
+                    <div key={i}>
+                      <h4 className="font-semibold text-gray-800 mb-2 border-b pb-1">
+                        {menu.title}
+                      </h4>
+                      <ul className="space-y-1 text-gray-600 text-sm">
+                        {menu.items.map((item, j) => (
+                          <li
+                            key={j}
+                            className="hover:text-yellow-700 cursor-pointer transition-colors"
+                          >
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
           ))}
         </nav>
       </header>
 
-      {/* Backdrop Overlay with Blur */}
+      {/* Backdrop Blur when mega menu open */}
+      {showMegaMenu && (
+        <div
+          className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40"
+          onClick={() => setShowMegaMenu(false)}
+        ></div>
+      )}
+
+      {/* Mobile Offcanvas */}
       <div
-        className={`fixed inset-0 bg-black/50 backdrop-blur-sm z-[60] transition-opacity duration-300 ${isOffcanvasOpen ? "opacity-100 visible" : "opacity-0 invisible"
-          }`}
+        className={`fixed inset-0 bg-black/50 backdrop-blur-sm z-[60] transition-opacity duration-300 ${
+          isOffcanvasOpen ? "opacity-100 visible" : "opacity-0 invisible"
+        }`}
         onClick={() => setIsOffcanvasOpen(false)}
       />
 
-      {/* Left Side Offcanvas */}
       <div
-        className={`fixed top-0 left-0 h-full w-80 bg-white shadow-2xl z-[70] transform transition-transform duration-300 ease-in-out ${isOffcanvasOpen ? "translate-x-0" : "-translate-x-full"
-          }`}
+        className={`fixed top-0 left-0 h-full w-72 bg-white shadow-2xl z-[70] transform transition-transform duration-300 ${
+          isOffcanvasOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
       >
-        {/* Offcanvas Header */}
         <div className="flex items-center justify-between p-4 border-b">
-          <h2 className="text-xl font-bold" style={{ color: "#D4AF37" }}>
+          <h2 className="text-lg font-bold" style={{ color: "#D4AF37" }}>
             Menu
           </h2>
           <FaTimes
-            size={24}
-            className="cursor-pointer hover:text-yellow-700 transition-colors"
+            size={22}
+            className="cursor-pointer hover:text-yellow-700"
             onClick={() => setIsOffcanvasOpen(false)}
           />
         </div>
 
-        {/* Categories - Mobile */}
-        <nav className="p-4 overflow-y-auto h-[calc(100vh-180px)]">
-          <h3 className="text-sm font-semibold text-gray-500 uppercase mb-3">Categories</h3>
-          <div className="space-y-1">
-            {categories.map((cat, idx) => (
-              <a
-                key={idx}
-                href="#"
-                className="block py-3 px-4 text-gray-700 hover:bg-yellow-50 hover:text-yellow-700 rounded-md transition-all duration-200"
-                onClick={() => setIsOffcanvasOpen(false)}
-              >
-                {cat}
-              </a>
-            ))}
-          </div>
-        </nav>
+        <nav className="p-4 space-y-2 overflow-y-auto h-[calc(100vh-100px)]">
+          {categories.map((cat, idx) => (
+            <div key={idx}>
+              {cat === "Shop By Category" ? (
+                <>
+                  <button
+                    className="w-full flex justify-between items-center py-2 px-3 text-gray-700 hover:bg-yellow-50 hover:text-yellow-700 rounded-md"
+                    onClick={() =>
+                      setMobileDropdownOpen((prev) => !prev)
+                    }
+                  >
+                    {cat}
+                    <FaChevronDown
+                      className={`transition-transform ${
+                        mobileDropdownOpen ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
 
-        {/* Offcanvas Footer */}
-        <div className="absolute bottom-0 left-0 right-0 p-4 border-t bg-gray-50">
-          <div className="flex justify-around">
-            <FaHeart size={22} className="cursor-pointer hover:text-yellow-700 transition-colors" />
-            <FaShoppingBag size={22} className="cursor-pointer hover:text-yellow-700 transition-colors" />
-            <FaUser size={22} className="cursor-pointer hover:text-yellow-700 transition-colors" />
-          </div>
-        </div>
+                  <div
+                    className={`overflow-hidden transition-all duration-300 ${
+                      mobileDropdownOpen ? "max-h-80" : "max-h-0"
+                    }`}
+                  >
+                    <ul className="pl-6 py-2 space-y-1 text-sm text-gray-600">
+                      {megaCategories.map((menu) => (
+                        <li key={menu.title} className="font-semibold">
+                          {menu.title}
+                          <ul className="pl-4 text-gray-500 text-[13px]">
+                            {menu.items.map((sub) => (
+                              <li
+                                key={sub}
+                                className="py-1 hover:text-yellow-700 cursor-pointer"
+                              >
+                                {sub}
+                              </li>
+                            ))}
+                          </ul>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </>
+              ) : (
+                <a
+                  href="#"
+                  className="block py-2 px-3 text-gray-700 hover:bg-yellow-50 hover:text-yellow-700 rounded-md"
+                  onClick={() => setIsOffcanvasOpen(false)}
+                >
+                  {cat}
+                </a>
+              )}
+            </div>
+          ))}
+        </nav>
       </div>
     </>
   );

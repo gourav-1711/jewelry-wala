@@ -3,39 +3,45 @@ import { FaRupeeSign, FaStar, FaGift, FaHeart } from 'react-icons/fa';
 
 const ShopByPrice = () => {
   const priceCategories = [
-    { icon: <FaRupeeSign size={40} />, label: 'Under ₹599' },
-    { icon: <FaStar size={40} />, label: '₹600 - ₹999' },
-    { icon: <FaGift size={40} />, label: '₹1000 - ₹1999' },
-    { icon: <FaHeart size={40} />, label: '₹2000 & Above' },
+    { icon: <FaRupeeSign size={30} />, label: 'Under ₹599' },
+    { icon: <FaStar size={30} />, label: '₹600 - ₹999' },
+    { icon: <FaGift size={30} />, label: '₹1000 - ₹1999' },
+    { icon: <FaHeart size={30} />, label: '₹2000 & Above' },
   ];
 
   return (
-    <div className="w-full px-4 py-8 bg-gradient-to-br from-pink-50 via-pink-25 to-purple-50  shadow-lg">
-      <h2 className="text-3xl font-serif mb-8 text-center text-purple-800 relative">
-        Shop by Price
-        <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-pink-400 to-purple-400 rounded-full"></div>
-      </h2>
-      <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-4 gap-4 text-center max-w-6xl mx-auto">
-        {priceCategories.map((item, index) => (
-          <div
-            key={index}
-            className="group flex flex-col items-center justify-center p-6 bg-white shadow-lg rounded-2xl
-                       hover:shadow-2xl hover:-translate-y-2 hover:scale-105
-                       transition-all duration-300 ease-in-out cursor-pointer
-                       border-2 border-transparent hover:border-purple-200
-                       hover:bg-gradient-to-br hover:from-purple-50 hover:to-white min-h-[160px]"
-          >
-            <div className="text-purple-600 mb-3 group-hover:text-purple-700
-                          group-hover:scale-110 group-hover:rotate-3 transform transition-all duration-300">
-              {item.icon}
+    <div className="w-full bg-gradient-to-br from-slate-50 via-gray-50 to-zinc-50 py-8">
+      <div className="max-w-6xl mx-auto">
+        {/* Heading */}
+        <div className="text-center mb-6">
+          <h2 className="text-3xl font-serif text-slate-800 mb-3 tracking-wide">
+            Shop by Price
+          </h2>
+          <div className="w-20 h-0.5 bg-gradient-to-r from-slate-400 to-slate-600 mx-auto rounded-full"></div>
+        </div>
+
+        {/* Price Grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-6 px-2">
+          {priceCategories.map((item, index) => (
+            <div
+              key={index}
+              className="group bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer
+                         border border-slate-200 hover:border-slate-300 overflow-hidden hover:-translate-y-1 p-4 flex flex-col items-center justify-center min-h-[140px]"
+            >
+              <div className="text-slate-700 mb-2 group-hover:text-slate-900 transition-all duration-300">
+                {item.icon}
+              </div>
+              <p className="text-base font-semibold text-slate-800 group-hover:text-slate-900 text-center">
+                {item.label}
+              </p>
+              <div className="mt-2 w-0 h-0.5 bg-gradient-to-r from-slate-400 to-slate-600 mx-auto rounded-full
+                            group-hover:w-12 transition-all duration-300"></div>
             </div>
-            <p className="text-lg font-semibold text-gray-800 group-hover:text-purple-900 transition-colors duration-300 leading-tight">
-              {item.label}
-            </p>
-            <div className="mt-2 w-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-400 rounded-full
-                          group-hover:w-full transition-all duration-500 ease-out"></div>
-          </div>
-        ))}
+          ))}
+        </div>
+
+        {/* Decorative bottom border */}
+        <div className="h-px bg-gradient-to-r from-transparent via-slate-300 to-transparent mt-6"></div>
       </div>
     </div>
   );
