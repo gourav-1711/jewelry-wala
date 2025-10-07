@@ -1,3 +1,4 @@
+import Cart from '@/app/(sections)/Cart';
 import React from 'react'
 
 
@@ -10,6 +11,6 @@ export const metadata = {
 
 export default function page() {
   return (
-    <div>No Code here create about component and import it</div>
+   <Cart/>
   )
 }

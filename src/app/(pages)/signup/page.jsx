@@ -1,15 +1,18 @@
+import SignUpPage from '@/app/(sections)/SignUp';
 import React from 'react'
 
 
 
 export const metadata = {
-    title: "Login-Signup",
+    title: "Sign Up",
     description:
-      "Login-Signup Page",
+      "Sign Up Page",
   };
 
 export default function page() {
   return (
-    <div>No Code here create about component and import it</div>
+    <>
+    <SignUpPage />
+    </>
   )
 }

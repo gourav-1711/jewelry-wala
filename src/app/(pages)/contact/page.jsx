@@ -1,3 +1,4 @@
+import ContactPage from '@/app/(sections)/Contact';
 import React from 'react'
 
 
@@ -10,6 +11,8 @@ export const metadata = {
 
 export default function page() {
   return (
-    <div>No Code here create Contact component and import it</div>
+    <div>
+      <ContactPage />
+    </div>
   )
 }

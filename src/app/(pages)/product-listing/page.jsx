@@ -1,18 +1,18 @@
-import OrderTracking from '@/app/(sections)/Track';
+import ProductListing from '@/app/(sections)/ProductListing';
 import React from 'react'
 
 
 
 export const metadata = {
-    title: "Order Track",
+    title: "Product Listing",
     description:
-      "Order Track Page",
+      "Product Listing Page",
   };
 
 export default function page() {
   return (
     <div>
-      <OrderTracking />
+        <ProductListing />
     </div>
   )
 }

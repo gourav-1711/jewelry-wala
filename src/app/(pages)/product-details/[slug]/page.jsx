@@ -1,4 +1,5 @@
 import React from 'react'
+import ProductDetail from '@/app/(sections)/ProductDetail'
 
 
 
@@ -10,6 +11,6 @@ export const metadata = {
 
 export default function page() {
   return (
-    <div>No Code here create about component and import it</div>
+    <ProductDetail />
   )
 }
