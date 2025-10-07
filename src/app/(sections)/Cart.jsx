@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { ShoppingCart, Plus, Minus, X, ChevronRight } from 'lucide-react';
+import Link from 'next/link';
 
 const initialCartItems = [
   {
@@ -207,12 +208,12 @@ export default function Cart() {
 
                   {/* Buttons */}
                   <div className="mt-6 space-y-3">
-                    <button className="w-full bg-amber-500 hover:bg-amber-600 text-white font-semibold py-3 rounded-lg transition">
+                    <Link href="/checkout"> <button className="w-full bg-amber-500 hover:bg-amber-600 text-white font-semibold py-3 rounded-lg transition">
                       Proceed to Checkout
-                    </button>
-                    <button className="w-full bg-white border border-gray-300 text-gray-700 hover:border-amber-500 font-medium py-3 rounded-lg transition">
+                    </button></Link>
+                    <Link href="/"> <button className="w-full bg-white mt-2 border border-gray-300 text-gray-700 hover:border-amber-500 font-medium py-3 rounded-lg transition">
                       Continue Shopping
-                    </button>
+                    </button></Link>
                   </div>
 
                   <div className="mt-6 border-t border-gray-200 pt-4 text-xs text-gray-600 space-y-1">

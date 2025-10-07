@@ -1,3 +1,4 @@
+import CheckoutPage from '@/app/(sections)/Checkout';
 import React from 'react'
 
 
@@ -10,6 +11,6 @@ export const metadata = {
 
 export default function page() {
   return (
-    <div>No Code here create checkout component and import it</div>
+    <CheckoutPage/>
   )
 }

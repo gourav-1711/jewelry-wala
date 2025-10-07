@@ -3,10 +3,34 @@ import { FaRupeeSign, FaStar, FaGift, FaHeart } from 'react-icons/fa';
 
 const ShopByPrice = () => {
   const priceCategories = [
-    { icon: <FaRupeeSign size={30} />, label: 'Under ₹599' },
-    { icon: <FaStar size={30} />, label: '₹600 - ₹999' },
-    { icon: <FaGift size={30} />, label: '₹1000 - ₹1999' },
-    { icon: <FaHeart size={30} />, label: '₹2000 & Above' },
+    { 
+      icon: <FaRupeeSign 
+              size={30} 
+              className="text-amber-500 group-hover:text-amber-600 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300"
+            />, 
+      label: 'Under ₹599' 
+    },
+    { 
+      icon: <FaStar 
+              size={30} 
+              className="text-purple-500 group-hover:text-purple-600 group-hover:animate-pulse group-hover:rotate-12 transition-all duration-300"
+            />, 
+      label: '₹600 - ₹999' 
+    },
+    { 
+      icon: <FaGift 
+              size={30} 
+              className="text-rose-500 group-hover:text-rose-600 group-hover:scale-110 group-hover:-rotate-6 transition-all duration-500"
+            />, 
+      label: '₹1000 - ₹1999' 
+    },
+    { 
+      icon: <FaHeart 
+              size={30} 
+              className="text-emerald-500 group-hover:text-emerald-600 group-hover:scale-110 group-hover:animate-pulse transition-all duration-300"
+            />, 
+      label: '₹2000 & Above' 
+    },
   ];
 
   return (
@@ -28,7 +52,7 @@ const ShopByPrice = () => {
               className="group bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer
                          border border-slate-200 hover:border-slate-300 overflow-hidden hover:-translate-y-1 p-4 flex flex-col items-center justify-center min-h-[140px]"
             >
-              <div className="text-slate-700 mb-2 group-hover:text-slate-900 transition-all duration-300">
+              <div className="mb-2 p-3 rounded-full bg-gradient-to-br from-white to-gray-50 shadow-sm group-hover:shadow-md transition-all duration-300">
                 {item.icon}
               </div>
               <p className="text-base font-semibold text-slate-800 group-hover:text-slate-900 text-center">

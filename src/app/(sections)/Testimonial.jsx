@@ -11,7 +11,7 @@ const Testimonial = () => {
       location: "Mumbai",
       rating: 5,
       review: "Absolutely love my purchase! The quality is exceptional and the delivery was super fast. Will definitely shop again!",
-      image: "/images/customer1.jpg",
+      image: "/images/me.jpg",
     },
     {
       id: 2,
@@ -19,7 +19,7 @@ const Testimonial = () => {
       location: "Delhi",
       rating: 5,
       review: "Amazing collection and great customer service. The packaging was beautiful and the product exceeded my expectations.",
-      image: "/images/customer2.jpg",
+      image: "/images/me.jpg",
     },
     {
       id: 3,
@@ -27,7 +27,7 @@ const Testimonial = () => {
       location: "Ahmedabad",
       rating: 5,
       review: "Perfect gift for my anniversary! My wife loved it. The craftsmanship is outstanding and the price is very reasonable.",
-      image: "/images/customer3.jpg",
+      image: "/images/me.jpg",
     },
     {
       id: 4,
@@ -35,7 +35,7 @@ const Testimonial = () => {
       location: "Jaipur",
       rating: 5,
       review: "Excellent quality and authentic products. The return policy gave me confidence to purchase. Highly recommended!",
-      image: "/images/customer4.jpg",
+      image: "/images/me.jpg",
     },
     {
       id: 5,
@@ -43,7 +43,7 @@ const Testimonial = () => {
       location: "Bangalore",
       rating: 5,
       review: "Beautiful designs and great variety. The website is easy to navigate and the checkout process is smooth.",
-      image: "/images/customer5.jpg",
+      image: "/images/me.jpg",
     },
     {
       id: 6,
@@ -51,7 +51,7 @@ const Testimonial = () => {
       location: "Pune",
       rating: 5,
       review: "Outstanding service and product quality. Received my order within 2 days. Will definitely be a repeat customer!",
-      image: "/images/customer6.jpg",
+      image: "/images/me.jpg",
     },
   ];
 

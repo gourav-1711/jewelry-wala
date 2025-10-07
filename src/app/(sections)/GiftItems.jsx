@@ -3,14 +3,14 @@ import Image from "next/image";
 
 const GiftItems = () => {
   const products = [
-    { id: 1, img: "/images/image1.jpeg", name: "Silver Gift Box", price: "₹499" },
-    { id: 2, img: "/images/image2.jpeg", name: "Heart Pendant", price: "₹799" },
-    { id: 3, img: "/images/image3.jpeg", name: "Couple Bracelet", price: "₹999" },
-    { id: 4, img: "/images/image4.jpeg", name: "Love Ring Set", price: "₹1199" },
-    { id: 5, img: "/images/image5.jpeg", name: "Designer Watch", price: "₹1499" },
-    { id: 6, img: "/images/image1.jpeg", name: "Customized Keychain", price: "₹599" },
-    { id: 7, img: "/images/image2.jpeg", name: "Golden Rose", price: "₹899" },
-    { id: 8, img: "/images/image3.jpeg", name: "Teddy & Mug Combo", price: "₹699" },
+    { id: 1, img: "/images/image1.jpg", name: "Silver Gift Box", price: "₹499" },
+    { id: 2, img: "/images/image2.jpg", name: "Heart Pendant", price: "₹799" },
+    { id: 3, img: "/images/image3.jpg", name: "Couple Bracelet", price: "₹999" },
+    { id: 4, img: "/images/image4.jpg", name: "Love Ring Set", price: "₹1199" },
+    { id: 5, img: "/images/image5.jpg", name: "Designer Watch", price: "₹1499" },
+    { id: 6, img: "/images/image1.jpg", name: "Customized Keychain", price: "₹599" },
+    { id: 7, img: "/images/image2.jpg", name: "Golden Rose", price: "₹899" },
+    { id: 8, img: "/images/image3.jpg", name: "Teddy & Mug Combo", price: "₹699" },
   ];
 
   return (
