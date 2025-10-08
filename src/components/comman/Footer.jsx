@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { FaFacebookF, FaInstagram, FaYoutube } from "react-icons/fa";
 
 export default function Footer() {
@@ -47,9 +48,9 @@ export default function Footer() {
         <div>
           <h3 className="font-semibold mb-3">Useful Links</h3>
           <ul className="space-y-2 text-sm">
-            <li>About Us</li>
-            <li>Contact Us</li>
-            <li>Sitemap</li>
+            <li><Link href={"/about"}> About Us</Link></li>
+            <li> <Link href={"/contact"}> Contact Us</Link></li>
+            <li><Link href={"/faq"}>FAQ</Link></li>
           </ul>
           <h3 className="font-semibold mt-5 mb-2">Keep In Touch</h3>
           <div className="flex gap-3 text-xl">

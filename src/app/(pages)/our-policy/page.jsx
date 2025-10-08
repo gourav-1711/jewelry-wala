@@ -1,18 +1,18 @@
-import AccountPage from '@/app/(sections)/Profile';
+import PoliciesPage from '@/app/(sections)/OurPolicy';
 import React from 'react'
 
 
 
 export const metadata = {
-    title: "Profile",
+    title: "Our Policy",
     description:
-      "Profile Page",
+      "Our Policy Page",
   };
 
 export default function page() {
   return (
     <>
-      <AccountPage/>
+   <PoliciesPage/>
     </>
   )
 }

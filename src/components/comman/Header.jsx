@@ -35,7 +35,7 @@ export default function Header() {
     { name: "New Arrivals", href: "/product-listing" },
     { name: "Gift Items", href: "/gift-items" },
     { name: "Track Your Order", href: "/order-track" },
-    { name: "Sale", href: "/sale" },
+    { name: "Personalised Jewellery", href: "/personalized" },
     { name: "Contact Us", href: "/contact" },
   ];
 

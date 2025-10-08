@@ -29,7 +29,6 @@ export default function ContactPage() {
       setIsSubmitted(true);
       setIsLoading(false);
       setFormData({ name: "", email: "", subject: "", message: "" });
-
       setTimeout(() => setIsSubmitted(false), 5000);
     }, 1500);
   };
@@ -38,41 +37,45 @@ export default function ContactPage() {
     {
       icon: Phone,
       title: "Phone",
-      content: "+1-800-555-0199",
+      content: "+91-6378643867",
       subContent: "Mon-Fri, 9am-6pm EST",
       color: "bg-amber-50 text-amber-600",
-      href: "tel:+18005550199"
+      href: "tel:+916378643867",
     },
     {
       icon: Mail,
       title: "Email",
-      content: "support@luminajewels.com",
+      content: "jewellerywalaonline@gmail.com",
       subContent: "We'll respond within 24 hours",
       color: "bg-yellow-50 text-yellow-600",
-      href: "mailto:support@luminajewels.com"
+      href: "mailto:jewellerywalaonline@gmail.com",
     },
     {
       icon: MapPin,
       title: "Address",
-      content: "123 Gemstone Lane, Suite 456",
-      subContent: "New York, NY 10001",
+      content: "Main Jhalamand Circle Jodhpur",
+      subContent: "Jodhpur,Rajasthan",
       color: "bg-orange-50 text-orange-600",
-      href: "https://maps.google.com"
+      href: "https://maps.google.com",
     },
   ];
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-amber-50/30 to-white">
       {/* Hero Section */}
-      <section className="relative bg-[#ccc] py-16 md:py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4xIj48cGF0aCBkPSJNMzYgMzRjMC0yLjIxLTEuNzktNC00LTRzLTQgMS43OS00IDQgMS43OSA0IDQgNCA0LTEuNzkgNC00em0wLTEyYzAtMi4yMS0xLjc5LTQtNC00cy00IDEuNzktNCA0IDEuNzkgNCA0IDQgNC0xLjc5IDQtNHoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-10"></div>
-
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-[georgia] mb-6 animate-fadeIn">
+      <section className="relative w-full overflow-hidden">
+        <div className="relative h-[50vh] md:h-[60vh] lg:h-[70vh]">
+          <img
+            src="/images/contact.jpg"
+            alt="Contact background"
+            className="absolute inset-0 w-full h-full object-contain md:object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-black/50"></div>
+          <div className="absolute inset-0 flex flex-col justify-center items-center text-center px-4 sm:px-6 lg:px-8 z-10">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-[georgia] text-white mb-6 animate-fadeIn">
               Contact Us
             </h1>
-            <p className="text-lg md:text-xl font-serif leading-relaxed">
+            <p className="text-lg md:text-xl font-serif text-gray-200 leading-relaxed max-w-2xl mx-auto">
               We're here to help. Please reach out with any questions or concerns.
               We will get back to you as soon as possible.
             </p>
@@ -80,10 +83,11 @@ export default function ContactPage() {
         </div>
       </section>
 
+
       {/* Main Content */}
       <section className="container mx-auto px-4 sm:px-6 lg:px-8 -mt-12 relative z-20 pb-16 md:pb-24">
         <div className="grid lg:grid-cols-3 gap-8 lg:gap-12">
-          {/* Contact Information Cards */}
+          {/* Contact Information */}
           <div className="lg:col-span-1 space-y-6">
             {contactInfo.map((info, index) => (
               <Card
@@ -97,7 +101,9 @@ export default function ContactPage() {
                     target={info.icon === MapPin ? "_blank" : undefined}
                     rel={info.icon === MapPin ? "noopener noreferrer" : undefined}
                   >
-                    <div className={`${info.color} p-3 rounded-xl group-hover:scale-110 transition-transform duration-300`}>
+                    <div
+                      className={`${info.color} p-3 rounded-xl group-hover:scale-110 transition-transform duration-300`}
+                    >
                       <info.icon className="w-6 h-6" />
                     </div>
                     <div className="flex-1">
@@ -116,8 +122,6 @@ export default function ContactPage() {
                 </CardContent>
               </Card>
             ))}
-
-
           </div>
 
           {/* Contact Form */}
@@ -137,12 +141,13 @@ export default function ContactPage() {
                   <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg flex items-center gap-3 animate-fadeIn">
                     <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0" />
                     <p className="text-green-800 text-sm">
-                      Thank you! Your message has been sent successfully. We'll respond within 24 hours.
+                      Thank you! Your message has been sent successfully. We'll
+                      respond within 24 hours.
                     </p>
                   </div>
                 )}
 
-                <div className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <Label htmlFor="name" className="text-gray-700 font-medium">
@@ -210,7 +215,7 @@ export default function ContactPage() {
                   </div>
 
                   <Button
-                    onClick={handleSubmit}
+                    type="submit"
                     disabled={isLoading}
                     className="w-full md:w-auto bg-gradient-to-r from-amber-600 to-yellow-600 hover:from-amber-700 hover:to-yellow-700 text-white px-8 h-12 text-base font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
                   >
@@ -226,13 +231,12 @@ export default function ContactPage() {
                       </span>
                     )}
                   </Button>
-                </div>
+                </form>
               </CardContent>
             </Card>
           </div>
         </div>
       </section>
-
 
       <style jsx>{`
         @keyframes fadeIn {

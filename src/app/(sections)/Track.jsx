@@ -31,10 +31,10 @@ export default function OrderTracking() {
         <div className="min-h-screen bg-gray-50 p-4 md:p-10">
             <div className="max-w-3xl mx-auto">
                 {/* Header */}
-                <h1 className="text-3xl font-bold text-gray-900 mb-2">
+                <h1 className="text-3xl font-serif text-gray-900 mb-2">
                     Track Your Order
                 </h1>
-                <p className="text-gray-600 mb-6">
+                <p className="text-gray-600 font-sans mb-6">
                     Enter your order details to see its current status.
                 </p>
 
@@ -77,7 +77,7 @@ export default function OrderTracking() {
 
                 {/* Order Status */}
                 <div className="bg-white rounded-xl shadow-md p-6">
-                    <h2 className="text-xl font-bold text-gray-900 mb-4">
+                    <h2 className="text-xl font-semibold text-gray-900 mb-4">
                         Order Status
                     </h2>
 
@@ -99,13 +99,19 @@ export default function OrderTracking() {
 
                     {/* Map */}
                     <div className="mb-6 rounded-lg overflow-hidden shadow">
-                        <Image
-                            src="/images/map-placeholder.png" // Replace with real map or embed map
-                            alt="Map"
-                            width={800}
-                            height={400}
-                            className="w-full object-cover"
-                        />
+                        <div className="mb-6 rounded-lg overflow-hidden shadow">
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3559.911016568673!2d75.78961617519594!3d26.84371297672977!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396db3b75bcb2ee9%3A0x7b191b0f38ef5345!2sWsCube%20Tech!5e0!3m2!1sen!2sin!4v1695987631873!5m2!1sen!2sin"
+                                width="800"
+                                height="400"
+                                style={{ border: 0 }}
+                                allowFullScreen=""
+                                loading="lazy"
+                                referrerPolicy="no-referrer-when-downgrade"
+                                className="w-full h-[400px] rounded-lg object-cover"
+                            ></iframe>
+                        </div>
+
                     </div>
 
                     {/* Timeline */}
@@ -115,8 +121,8 @@ export default function OrderTracking() {
                                 <div className="flex-shrink-0">
                                     <div
                                         className={`w-6 h-6 rounded-full border-2 border-yellow-500 flex items-center justify-center ${index + 1 <= Object.keys(progressPercentage).indexOf(status) + 1
-                                                ? "bg-yellow-500 text-white"
-                                                : "bg-white text-gray-400"
+                                            ? "bg-yellow-500 text-white"
+                                            : "bg-white text-gray-400"
                                             }`}
                                     >
                                         {index + 1 <= Object.keys(progressPercentage).indexOf(status) + 1 && (

@@ -3,10 +3,15 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { ChevronRight, Star } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { FaShoppingCart } from 'react-icons/fa';
+import { IoMdArrowDropright } from "react-icons/io";
+
+
 
 const productData = {
   id: '1',
-  name: 'Celestial Pendant',
+  name: 'Traditional Bangle',
   price: 1250,
   description:
     'A delicate pendant featuring a starburst design with a central diamond, crafted in 18k white gold. Perfect for adding a touch of sparkle to any outfit.',
@@ -59,6 +64,13 @@ export default function ProductPage() {
 
   const handleWishlist = () => setWishlist(!wishlist);
 
+  const router = useRouter();
+
+  const handleBuyNow = () => {
+    // Yahan tu apna checkout ya product page ka route de sakta hai
+    router.push("/checkout");
+  };
+
   const renderStars = (rating) =>
     Array.from({ length: 5 }).map((_, i) => (
       <Star
@@ -71,7 +83,7 @@ export default function ProductPage() {
   return (
     <main className="bg-gray-50 py-8 sm:py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Breadcrumb */}
         <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-600 mb-6">
           <a href="#" className="text-amber-600 hover:underline">Jewelry</a>
@@ -83,7 +95,7 @@ export default function ProductPage() {
 
         {/* Product Section */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10 mb-16">
-          
+
           {/* Gallery */}
           <div className="space-y-3">
             <div className="relative bg-gray-100 rounded-lg overflow-hidden h-80 sm:h-[460px]">
@@ -101,11 +113,10 @@ export default function ProductPage() {
                 <button
                   key={idx}
                   onClick={() => setCurrentImage(idx)}
-                  className={`flex-shrink-0 w-16 h-16 rounded-md overflow-hidden border-2 transition ${
-                    currentImage === idx
-                      ? 'border-amber-600'
-                      : 'border-gray-300 hover:border-amber-500'
-                  }`}
+                  className={`flex-shrink-0 w-16 h-16 rounded-md overflow-hidden border-2 transition ${currentImage === idx
+                    ? 'border-amber-600'
+                    : 'border-gray-300 hover:border-amber-500'
+                    }`}
                 >
                   <Image
                     src={image}
@@ -127,7 +138,7 @@ export default function ProductPage() {
 
             <div className="flex items-center gap-4 mb-4">
               <span className="text-2xl sm:text-3xl font-semibold text-amber-600">
-                ${productData.price}
+                ₹{productData.price}
               </span>
               <div className="flex items-center gap-2">
                 <div className="flex gap-1">{renderStars(productData.rating)}</div>
@@ -167,22 +178,22 @@ export default function ProductPage() {
             </div>
 
             {/* Buttons */}
-            <div className="flex flex-col sm:flex-row gap-3 mb-6">
+            <div className="flex flex-col sm:flex-row gap-4 mb-6 w-full sm:w-auto">
+              {/* Buy Now Button */}
+              <button
+                onClick={handleBuyNow}
+                className="flex items-center justify-center gap-2 bg-gradient-to-r from-amber-600 to-yellow-500 text-white font-semibold px-6 py-3 rounded-xl shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300 ease-in-out w-full sm:w-auto"
+              >
+                <FaShoppingCart className="w-5 h-5" />
+                Buy Now
+              </button>
+
+              {/* Add to Cart Button */}
               <button
                 onClick={handleAddToCart}
-                className="flex-1 bg-amber-500 hover:bg-amber-600 text-white font-semibold py-2.5 px-4 rounded-lg transition"
+                className="flex items-center justify-center bg-amber-500 hover:bg-amber-600 text-white font-semibold px-6 py-3 rounded-xl shadow-md transition-all duration-300 ease-in-out w-full sm:w-auto"
               >
                 Add to Cart
-              </button>
-              <button
-                onClick={handleWishlist}
-                className={`flex-1 font-semibold py-2.5 px-4 rounded-lg border-2 transition ${
-                  wishlist
-                    ? 'bg-red-50 border-red-500 text-red-500'
-                    : 'bg-white border-gray-300 text-gray-700 hover:border-amber-600'
-                }`}
-              >
-                {wishlist ? '❤️ Wishlisted' : '♡ Add to Wishlist'}
               </button>
             </div>
 
@@ -195,16 +206,16 @@ export default function ProductPage() {
             {/* Features */}
             <div className="space-y-2 border-t pt-4 text-sm">
               <div className="flex items-center gap-2">
-                <span className="text-lg">🚚</span>
+                <span className="text-lg"><IoMdArrowDropright /></span>
                 <p><strong>Free Shipping</strong> on orders over $100</p>
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-lg">🔄</span>
+                <span className="text-lg"><IoMdArrowDropright /></span>
                 <p><strong>Easy Returns</strong> within 30 days</p>
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-lg">✨</span>
-                <p><strong>Authentic & Certified</strong> jewelry guaranteed</p>
+                <span className="text-lg"><IoMdArrowDropright /></span>
+                <p><strong>Authentic & Certified</strong> Jewellery guaranteed</p>
               </div>
             </div>
           </div>
