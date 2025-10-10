@@ -37,10 +37,10 @@ export default function Footer() {
         <div>
           <h3 className="font-semibold mb-3">Our Policies</h3>
           <ul className="space-y-2 text-sm">
-            <li>Privacy Policy</li>
-            <li>Refund Policy</li>
-            <li>Terms of Usage</li>
-            <li>Shipping Policy</li>
+          <li> <Link href={"/our-policy"} > Privacy Policy</Link></li>
+          <li> <Link href={"/our-policy"} > Refund Policy</Link></li>
+          <li> <Link href={"/our-policy"} > Terms of Usage</Link></li>
+          <li> <Link href={"/our-policy"} > Shipping Policy</Link></li>
           </ul>
         </div>
 

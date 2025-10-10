@@ -1,3 +1,4 @@
+import Wishlist from '@/app/(sections)/Wishlist';
 import React from 'react'
 
 
@@ -10,6 +11,8 @@ export const metadata = {
 
 export default function page() {
   return (
-    <div>No Code here create wishlist component and import it</div>
+    <div>
+      <Wishlist />
+    </div>
   )
 }

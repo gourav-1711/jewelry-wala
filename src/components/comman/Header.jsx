@@ -112,7 +112,7 @@ export default function Header() {
 
           {/* Icons */}
           <div className="flex items-center space-x-3 md:space-x-5">
-            <FaHeart size={20} className="hidden md:block cursor-pointer hover:text-yellow-700" />
+           <Link href={"/wishlist"}><FaHeart size={20} className="hidden md:block cursor-pointer hover:text-yellow-700" /></Link>
             <Link href={"/cart"}><FaShoppingBag size={20} className="hidden md:block cursor-pointer hover:text-yellow-700" /></Link>
             <FaSearch
               size={20}

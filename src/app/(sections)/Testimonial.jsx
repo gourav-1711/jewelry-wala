@@ -10,7 +10,8 @@ const Testimonial = () => {
       name: "Priya Sharma",
       location: "Mumbai",
       rating: 5,
-      review: "Absolutely love my purchase! The quality is exceptional and the delivery was super fast. Will definitely shop again!",
+      review:
+        "Absolutely love my purchase! The quality is exceptional and delivery was super fast. Will definitely shop again!",
       image: "/images/me.jpg",
     },
     {
@@ -18,7 +19,8 @@ const Testimonial = () => {
       name: "Rahul Kumar",
       location: "Delhi",
       rating: 5,
-      review: "Amazing collection and great customer service. The packaging was beautiful and the product exceeded my expectations.",
+      review:
+        "Amazing collection and great customer service. The packaging was beautiful and exceeded my expectations.",
       image: "/images/me.jpg",
     },
     {
@@ -26,7 +28,8 @@ const Testimonial = () => {
       name: "Anjali Patel",
       location: "Ahmedabad",
       rating: 5,
-      review: "Perfect gift for my anniversary! My wife loved it. The craftsmanship is outstanding and the price is very reasonable.",
+      review:
+        "Perfect gift for my anniversary! My wife loved it. The craftsmanship is outstanding and price very reasonable.",
       image: "/images/me.jpg",
     },
     {
@@ -34,23 +37,8 @@ const Testimonial = () => {
       name: "Vikram Singh",
       location: "Jaipur",
       rating: 5,
-      review: "Excellent quality and authentic products. The return policy gave me confidence to purchase. Highly recommended!",
-      image: "/images/me.jpg",
-    },
-    {
-      id: 5,
-      name: "Kavita Reddy",
-      location: "Bangalore",
-      rating: 5,
-      review: "Beautiful designs and great variety. The website is easy to navigate and the checkout process is smooth.",
-      image: "/images/me.jpg",
-    },
-    {
-      id: 6,
-      name: "Amit Gupta",
-      location: "Pune",
-      rating: 5,
-      review: "Outstanding service and product quality. Received my order within 2 days. Will definitely be a repeat customer!",
+      review:
+        "Excellent quality and authentic products. The return policy gave me confidence to purchase. Highly recommended!",
       image: "/images/me.jpg",
     },
   ];
@@ -68,7 +56,6 @@ const Testimonial = () => {
     responsive: [
       { breakpoint: 1024, settings: { slidesToShow: 2 } },
       { breakpoint: 768, settings: { slidesToShow: 1 } },
-      { breakpoint: 480, settings: { slidesToShow: 1 } },
     ],
   };
 
@@ -76,82 +63,80 @@ const Testimonial = () => {
     Array.from({ length: 5 }, (_, index) => (
       <span
         key={index}
-        className={`text-lg ${index < rating ? "text-yellow-400" : "text-gray-300"}`}
-        aria-hidden="true"
+        className={`text-base sm:text-lg ${
+          index < rating ? "text-amber-400" : "text-gray-300"
+        }`}
       >
         ★
       </span>
     ));
 
   return (
-    <section className="w-full bg-gradient-to-br from-slate-50 via-gray-50 to-zinc-50 py-8">
-      <div className="max-w-7xl mx-auto px-4">
-
-        {/* Decorative Top Border */}
-        <div className="h-px bg-gradient-to-r from-transparent via-slate-300 to-transparent mb-6"></div>
+    <section
+      className="w-full bg-gradient-to-b from-gray-50 via-white to-gray-100 py-10"
+      itemScope
+      itemType="https://schema.org/Review"
+    >
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
 
         {/* Heading */}
         <div className="text-center mb-10">
-          <h2 className="text-3xl font-serif text-slate-800 mb-3 tracking-wide">
+          <h2 className="text-2xl sm:text-3xl font-serif text-gray-800 mb-2">
             What Our Customers Say
           </h2>
-          <div className="w-20 h-0.5 bg-gradient-to-r from-slate-400 to-slate-600 mx-auto rounded-full"></div>
-          <p className="text-slate-600 mt-3 text-base font-light">
+          <div className="w-16 h-1 bg-gradient-to-r from-amber-400 to-amber-600 mx-auto rounded-full"></div>
+          <p className="text-gray-500 mt-3 text-sm sm:text-base">
             Real experiences from our valued customers
           </p>
         </div>
 
-        {/* Testimonial Slider */}
+        {/* Slider */}
         <Slider {...settings}>
-          {testimonials.map((testimonial) => (
-            <article
-              key={testimonial.id}
-              className="px-2 sm:px-3"
-              itemScope
-              itemType="https://schema.org/Review"
-            >
-              <div className="flex flex-col items-center bg-white rounded-xl shadow-lg hover:shadow-xl
-                              transition-all duration-300 cursor-pointer border border-slate-200 hover:border-slate-300
-                              hover:-translate-y-1 p-6 min-h-[340px] sm:min-h-[360px] group">
-                <figure className="flex flex-col items-center w-full">
-                  {/* Customer Avatar */}
-                  <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden mb-4 border border-slate-200">
-                    <img
-                      src={testimonial.image}
-                      alt={`Customer: ${testimonial.name}`}
-                      className="w-full h-full object-cover"
-                      itemProp="image"
-                    />
-                  </div>
+          {testimonials.map((t) => (
+            <div key={t.id} className="px-2 sm:px-3">
+              <article
+                className="bg-white rounded-xl border border-gray-200 shadow-md hover:shadow-lg 
+                           transition-all duration-300 hover:-translate-y-1 p-6 flex flex-col items-center text-center"
+                itemScope
+                itemType="https://schema.org/Review"
+              >
+                {/* Avatar */}
+                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden mb-4 border border-gray-200">
+                  <img
+                    src={t.image}
+                    alt={`Customer ${t.name}`}
+                    className="w-full h-full object-cover"
+                    itemProp="image"
+                  />
+                </div>
 
-                  {/* Review Text */}
-                  <blockquote className="text-center flex-1">
-                    <p
-                      className="text-slate-600 text-sm sm:text-base leading-relaxed group-hover:text-slate-700 transition-colors"
-                      itemProp="reviewBody"
-                    >
-                      "{testimonial.review}"
-                    </p>
-                  </blockquote>
+                {/* Review Text */}
+                <blockquote className="flex-1">
+                  <p
+                    className="text-gray-600 text-sm sm:text-base leading-relaxed"
+                    itemProp="reviewBody"
+                  >
+                    "{t.review}"
+                  </p>
+                </blockquote>
 
-                  {/* Customer Name & Location */}
-                  <figcaption className="mt-4 text-center">
-                    <div className="flex justify-center mb-1">
-                      {renderStars(testimonial.rating)}
-                    </div>
-                    <p className="font-semibold text-slate-800 group-hover:text-slate-900 transition-colors" itemProp="author">
-                      {testimonial.name}
-                    </p>
-                    <p className="text-slate-500 text-sm">{testimonial.location}</p>
-                  </figcaption>
-                </figure>
-              </div>
-            </article>
+                {/* Stars */}
+                <div className="flex justify-center mt-4">{renderStars(t.rating)}</div>
+
+                {/* Name & Location */}
+                <figcaption className="mt-2">
+                  <p
+                    className="font-semibold text-gray-800 text-sm sm:text-base"
+                    itemProp="author"
+                  >
+                    {t.name}
+                  </p>
+                  <p className="text-gray-500 text-xs sm:text-sm">{t.location}</p>
+                </figcaption>
+              </article>
+            </div>
           ))}
         </Slider>
-
-        {/* Decorative Bottom Border */}
-        <div className="h-px bg-gradient-to-r from-transparent via-slate-300 to-transparent mt-8 mb-6"></div>
       </div>
     </section>
   );
