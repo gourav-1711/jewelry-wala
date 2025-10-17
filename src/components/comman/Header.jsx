@@ -160,7 +160,11 @@ const userMenuItems = [
   { label: "My Profile", icon: UserIcon, href: "/profile?tab=account" },
   { label: "My Orders", icon: Package, href: "/profile?tab=orders" },
   { label: "Account Settings", icon: Settings, href: "/profile?tab=settings" },
-  { label: "Addresses", icon: MapPin, href: "/profile?tab=addresses&to=address" },
+  {
+    label: "Addresses",
+    icon: MapPin,
+    href: "/profile?tab=addresses&to=address",
+  },
 ];
 
 // --- Component ---
@@ -359,19 +363,19 @@ export default function Header({ data, cart, wishlist }) {
   );
 
   return (
-    <header className="max-w-[100%] w-full mx-auto ">
-      {/* Top Bar (Unchanged) */}
+    <header className="w-full bg-white/90 backdrop-blur-xl">
+      {/* Top Bar */}
       <div
-        className={`text-center bg-gradient-to-r from-amber-600 to-amber-500 text-white text-sm py-2 transition-all duration-300 ${
+        className={`w-full text-center bg-gradient-to-r from-amber-600 to-amber-500 text-white text-sm py-2 transition-all duration-300 ${
           isScrolled ? "opacity-0 h-0 overflow-hidden" : "opacity-100"
         }`}
       >
-        <span> Free Shipping above ₹2000 | Welcome to Jewellery Wala</span>
+        <span>Free Shipping above ₹2000 | Welcome to Jewellery Wala</span>
       </div>
 
-      {/* Main Header Bar (STICKY) */}
+      {/* Main Header Bar */}
       <div
-        className={`sticky top-0 z-50 border-b border-amber-200 bg-white/90 backdrop-blur-xl  transition-all duration-300 ${
+        className={`w-full border-b border-amber-200 transition-all duration-300 ${
           isScrolled ? "py-2" : "py-4" // Visual shrinking effect
         }`}
       >
@@ -428,7 +432,10 @@ export default function Header({ data, cart, wishlist }) {
                 className="relative hover:bg-amber-50 hover:text-amber-600"
                 aria-label="View wishlist"
               >
-                <Heart fill={wishlistCount > 0 ? "#f5a22f" : "#FFF"} size={20} />
+                <Heart
+                  fill={wishlistCount > 0 ? "#f5a22f" : "#FFF"}
+                  size={20}
+                />
                 {wishlistCount > 0 && (
                   <Badge className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 bg-amber-600 hover:bg-amber-700 text-[10px] shadow-sm">
                     {wishlistCount}
@@ -445,7 +452,10 @@ export default function Header({ data, cart, wishlist }) {
                 className="relative hover:bg-amber-50 hover:text-amber-600"
                 aria-label="View shopping bag"
               >
-                <ShoppingBag fill={cartCount > 0 ? "#f5a22f" : "#FFF"} size={20} />
+                <ShoppingBag
+                  fill={cartCount > 0 ? "#f5a22f" : "#FFF"}
+                  size={20}
+                />
                 {cartCount > 0 && (
                   <Badge className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 bg-amber-600 hover:bg-amber-700 text-[10px] shadow-sm">
                     {cartCount}
@@ -501,10 +511,10 @@ export default function Header({ data, cart, wishlist }) {
                   <>
                     <DropdownMenuLabel className="bg-gradient-to-r from-amber-50 to-orange-50 py-3">
                       <p className="text-sm font-semibold text-gray-800">
-                        Welcome back! {user.name}
+                        Welcome back! {user?.name}
                       </p>
                       <p className="text-xs text-amber-600 mt-1 font-normal">
-                        {user.email}
+                        {user?.email}
                       </p>
                     </DropdownMenuLabel>
                     <DropdownMenuSeparator className="bg-amber-200" />

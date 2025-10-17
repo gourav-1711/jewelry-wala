@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
+import Image from "next/image";
 
 const Testimonial = ({ data }) => {
   const [isMounted, setIsMounted] = useState(false);
@@ -82,7 +83,10 @@ const Testimonial = ({ data }) => {
                     {/* Avatar */}
                     <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden mb-4 border border-gray-200">
                       <figure>
-                        <img
+                        <Image
+                          width={200}
+                          height={200}
+                          loading="lazy"
                           src={t.image}
                           alt={`Customer ${t.title}`}
                           className="w-full h-full object-cover"

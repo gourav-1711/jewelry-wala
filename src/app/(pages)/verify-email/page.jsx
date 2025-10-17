@@ -5,8 +5,18 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "sonner";
 import Cookies from "js-cookie";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSlot,
+} from "@/components/ui/input-otp";
 import { Loader2, Mail } from "lucide-react";
 
 export default function VerifyEmailPage() {
@@ -14,6 +24,7 @@ export default function VerifyEmailPage() {
   const searchParams = useSearchParams();
   const email = searchParams.get("email");
   const [otp, setOtp] = useState("");
+  const [isOtpComplete, setIsOtpComplete] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isResending, setIsResending] = useState(false);
   const [countdown, setCountdown] = useState(30);
@@ -32,7 +43,7 @@ export default function VerifyEmailPage() {
 
   const handleVerify = async (e) => {
     e.preventDefault();
-    if (!otp || otp.length !== 6) {
+    if (!isOtpComplete) {
       toast.error("Please enter a valid 6-digit OTP");
       return;
     }
@@ -121,9 +132,12 @@ export default function VerifyEmailPage() {
           <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-blue-100">
             <Mail className="h-6 w-6 text-blue-600" />
           </div>
-          <CardTitle className="text-2xl font-bold">Verify Your Email</CardTitle>
+          <CardTitle className="text-2xl font-bold">
+            Verify Your Email
+          </CardTitle>
           <CardDescription>
-            We've sent a verification code to <span className="font-medium">{email}</span>
+            We've sent a verification code to{" "}
+            <span className="font-medium">{email}</span>
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -135,26 +149,34 @@ export default function VerifyEmailPage() {
               >
                 Enter 6-digit code
               </label>
-              <div className="flex justify-center space-x-2">
-                {[...Array(6)].map((_, i) => (
-                  <Input
-                    key={i}
-                    type="text"
-                    maxLength={1}
-                    value={otp[i] || ""}
-                    onChange={(e) => {
-                      const newOtp = otp.split("");
-                      newOtp[i] = e.target.value;
-                      setOtp(newOtp.join(""));
-                    }}
-                    className="h-12 w-12 text-center text-lg"
-                    autoFocus={i === 0}
-                  />
-                ))}
+              <div className="flex justify-center">
+                <InputOTP
+                  maxLength={6}
+                  value={otp}
+                  onChange={(value) => {
+                    setOtp(value);
+                    setIsOtpComplete(value.length === 6);
+                  }}
+                  render={({ slots }) => (
+                    <InputOTPGroup className="gap-2">
+                      {slots.map((slot, index) => (
+                        <InputOTPSlot
+                          key={index}
+                          {...slot}
+                          className="h-12 w-12 text-lg border-gray-300"
+                        />
+                      ))}
+                    </InputOTPGroup>
+                  )}
+                />
               </div>
             </div>
 
-            <Button type="submit" className="w-full" disabled={isLoading}>
+            <Button
+              type="submit"
+              className="w-full"
+              disabled={isLoading || !isOtpComplete}
+            >
               {isLoading ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />

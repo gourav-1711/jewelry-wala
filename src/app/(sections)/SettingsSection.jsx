@@ -135,7 +135,7 @@ function PasswordFormSheet({ open, onOpenChange, type = "change" }) {
       console.error(error);
       toast.error(error.message || "Something went wrong. Please try again.");
       setIsLoading(false);
-    } 
+    }
   };
 
   return (
@@ -204,105 +204,6 @@ function PasswordFormSheet({ open, onOpenChange, type = "change" }) {
   );
 }
 
-// Verification Dialog
-function VerificationDialog({ open, onOpenChange, type = "email", value }) {
-  const [code, setCode] = useState();
-  const [isLoading, setIsLoading] = useState(false);
-  const [isResending, setIsResending] = useState(false);
-  console.log(code);
-
-  const handleVerify = async (e) => {
-    e.preventDefault();
-    setIsLoading(true);
-    console.log(code);
-    try {
-      setCode("");
-      const response = await fetch(
-        process.env.NEXT_PUBLIC_API_URL + "api/website/user/complete-verify",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({
-            otp: code,
-            token: Cookies.get("verify"),
-          }),
-        }
-      );
-      if (!response.ok) {
-        throw new Error("Something went wrong Please try again");
-      }
-      const data = await response.json();
-      if (data._status === true) {
-        onOpenChange(false);
-        setIsLoading(false);
-        toast.success(data._message);
-      }
-    } catch (error) {
-      console.error("Error verifying OTP:", error);
-    }
-  };
-
-  const handleResendCode = () => {};
-  return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader>
-          <DialogTitle>
-            Verify {type === "email" ? "Email" : "Phone"}
-          </DialogTitle>
-          <DialogDescription>
-            We've sent a verification code to {value}
-          </DialogDescription>
-        </DialogHeader>
-        <form onSubmit={handleVerify} className="mt-4">
-          <div className="flex justify-center gap-2 mb-6">
-            <InputOTP
-              value={code}
-              onChange={(value) => setCode(value)}
-              maxLength={6}
-            >
-              <InputOTPGroup>
-                <InputOTPSlot index={0} />
-                <InputOTPSlot index={1} />
-                <InputOTPSlot index={2} />
-                <InputOTPSlot index={3} />
-                <InputOTPSlot index={4} />
-                <InputOTPSlot index={5} />
-              </InputOTPGroup>
-            </InputOTP>
-          </div>
-          <div className="text-center text-sm text-muted-foreground mb-6">
-            Didn't receive a code?{" "}
-            <button
-              type="button"
-              onClick={handleResendCode}
-              className="text-amber-600 hover:underline"
-              disabled={isResending}
-            >
-              {isResending ? "Sending..." : "Resend code"}
-            </button>
-          </div>
-          <DialogFooter>
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => onOpenChange(false)}
-            >
-              Cancel
-            </Button>
-            <Button type="submit" disabled={isLoading || code == ""}>
-              {isLoading ? "Verifying..." : "Verify Now"}
-            </Button>
-          </DialogFooter>
-        </form>
-      </DialogContent>
-    </Dialog>
-  );
-}
-
 export default function SettingsSection({ data }) {
   const router = useRouter();
   const [showLogoutDialog, setShowLogoutDialog] = useState(false);
@@ -334,6 +235,9 @@ export default function SettingsSection({ data }) {
         }
 
         const resData = await response.json();
+        if (!resData._status) {
+          return toast.error(resData._message);
+        }
         if (resData._status === true) {
           Cookies.set("verify", resData._token, {
             expires: new Date(Date.now() + 10 * 60 * 1000),
@@ -353,6 +257,7 @@ export default function SettingsSection({ data }) {
   // Handle logout
   const handleLogout = async () => {
     dispatch(logout());
+    router.push("/");
   };
 
   return (

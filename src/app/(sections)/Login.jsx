@@ -71,12 +71,10 @@ const LoginPage = () => {
           body: JSON.stringify(formData),
         }
       );
-      if (!response.ok) {
-        console.log(response);
-        return setApiError("Failed to login. Please try again.");
-      }
-
       const data = await response.json();
+      if (!response.ok || !data._status) {
+        return setApiError(data._message || "Failed to login. Please try again.");
+      }
 
       if (!data._status) {
         return setApiError(data._message || "Invalid credentials");

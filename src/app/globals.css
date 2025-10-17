@@ -1,6 +1,29 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/* Prevent horizontal overflow and fix AOS issues */
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Fix for AOS elements causing horizontal scroll */
+[data-aos] {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Ensure all elements respect container width */
+* {
+  box-sizing: border-box;
+}
+
+/* Fix for AOS elements with transforms */
+body.aos-animate [data-aos] {
+  pointer-events: auto;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -127,8 +150,14 @@
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .animate-fadeIn {
@@ -141,13 +170,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #000 !important; 
-  padding: 10px;/* Sets the arrow icon color to black */
+  color: #000 !important;
+  padding: 10px; /* Sets the arrow icon color to black */
   background: #fff !important; /* Sets the background to white */
   border-radius: 50%; /* Makes the background circular */
   width: 40px !important; /* Default Swiper size, adjust as needed */
   height: 40px !important; /* Default Swiper size, adjust as needed */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for lift */
   transition: all 0.3s ease;
 }
 
@@ -162,11 +190,6 @@
 .swiper-button-prev:hover {
   transform: scale(1.1);
   background: #f0f0f0 !important; /* Slight change on hover */
-}
-
-/* Style the overall pagination container */
-.swiper-pagination {
-  /* You can add padding or positioning here if needed, e.g., bottom: 10px; */
 }
 
 /* Style for all inactive dots */
@@ -204,24 +227,23 @@
 /* This class should be applied to the Card */
 .mega-menu-enter {
   animation: megaMenuIn 0.3s ease-out forwards;
-
 }
 
-img{
+img {
   user-select: none;
 }
 
 ::selection {
-    background-color: gold; /* Use the color name 'gold' or a specific hex code like #FFD700 */
-    color: #000000;         /* Optional: Set the text color to black for high contrast */
+  background-color: gold; /* Use the color name 'gold' or a specific hex code like #FFD700 */
+  color: #000000; /* Optional: Set the text color to black for high contrast */
 }
 
 /* For older WebKit browsers (like some Safari versions) */
 ::-webkit-selection {
-    background-color: gold;
-    color: #000000;
+  background-color: gold;
+  color: #000000;
 }
 
-button{
+button {
   cursor: pointer;
 }

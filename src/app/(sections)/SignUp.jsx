@@ -39,17 +39,20 @@ const SignUpPage = () => {
       );
 
       const data = await response.json();
-
       if (!response.ok || !data._status) {
-        return setError(data._message || "Failed to sign up. Please try again.");
+        return setError(
+          data._message || "Failed to sign up. Please try again."
+        );
       }
 
       dispatch(register(data._token));
       dispatch(setProfile(data._data));
-      router.push(returnTo || "/profile");
+      router.push(returnTo || "/profile?tab=profile");
     } catch (err) {
       console.error(err);
-      return setError(err.message || "Failed to sign up. Please try again later.");
+      return setError(
+        err.message || "Failed to sign up. Please try again later."
+      );
     } finally {
       setLoading(false);
     }

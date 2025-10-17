@@ -216,14 +216,18 @@ export default async function RootLayout({ children }) {
         <meta name="geo.position" content="26.2389;73.0243" />
         <meta name="ICBM" content="26.2389, 73.0243" />
       </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased !overflow-x-hidden`}
-      >
+      <body className="min-h-screen bg-background font-sans antialiased flex flex-col">
         <Client>
-          <Toaster />
-          <Header data={user } cart={cart} wishlist={wishlist} />
-          <AosProvider>{children}</AosProvider>
-          <Footer />
+          <AosProvider>
+            <div className="flex flex-col min-h-screen">
+              <div className="sticky top-0 z-50 w-full">
+                <Header data={user} cart={cart} wishlist={wishlist} />
+              </div>
+              <main className="flex-1">{children}</main>
+              <Footer />
+            </div>
+            <Toaster position="top-center" richColors closeButton />
+          </AosProvider>
         </Client>
       </body>
     </html>

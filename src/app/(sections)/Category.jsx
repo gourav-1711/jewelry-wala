@@ -69,8 +69,6 @@ export default function RoundCategorySlider() {
           {categories.map((cat) => (
             <SwiperSlide key={cat.id}>
               <article
-              data-aos="fade-up"
-              data-aos-delay={cat.id * 50}
                 className="flex flex-col items-center px-2 sm:px-3 group cursor-pointer"
                 itemScope
                 itemType="https://schema.org/Thing"

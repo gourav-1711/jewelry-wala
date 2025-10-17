@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Mail, MapPin, Phone, Award, Shield, Truck, Heart } from "lucide-react";
 
-
 export default function Footer() {
   const featuredProducts = [
     {
@@ -53,8 +52,8 @@ export default function Footer() {
                 key={title}
                 className="flex items-center gap-3 p-3 rounded-lg hover:bg-white transition-colors duration-200"
                 data-aos="fade-up"
-                data-aos-delay={index * 100}
-                data-aos-duration="600"
+                data-aos-delay={index * 50}
+                data-aos-duration="400"
               >
                 <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-amber-400 to-yellow-500 flex items-center justify-center">
                   <Icon className="w-5 h-5 text-white" />
@@ -120,8 +119,8 @@ export default function Footer() {
             <div
               className="flex gap-2"
               data-aos="fade-up"
-              data-aos-delay="300"
-              data-aos-duration="600"
+              data-aos-delay="150"
+              data-aos-duration="400"
             >
               {[
                 { Icon: FaFacebookF, label: "Facebook", href: "#" },
@@ -153,8 +152,8 @@ export default function Footer() {
           <div
             className="sm:col-span-1 lg:col-span-1"
             data-aos="fade-up"
-            data-aos-delay="100"
-            data-aos-duration="700"
+            data-aos-delay="50"
+            data-aos-duration="500"
           >
             <h3 className="font-bold text-base mb-4 text-gray-900 uppercase tracking-wide border-b-2 border-yellow-400 pb-2 inline-block">
               Shop
@@ -187,7 +186,7 @@ export default function Footer() {
             className="sm:col-span-1 lg:col-span-1"
             data-aos="fade-up"
             data-aos-delay="200"
-            data-aos-duration="700"
+            data-aos-duration="500"
           >
             <h3 className="font-bold text-base mb-4 text-gray-900 uppercase tracking-wide border-b-2 border-yellow-400 pb-2 inline-block">
               Help
@@ -219,8 +218,8 @@ export default function Footer() {
           <div
             className="sm:col-span-1 lg:col-span-1"
             data-aos="fade-up"
-            data-aos-delay="300"
-            data-aos-duration="700"
+            data-aos-delay="150"
+            data-aos-duration="500"
           >
             <h3 className="font-bold text-base mb-4 text-gray-900 uppercase tracking-wide border-b-2 border-yellow-400 pb-2 inline-block">
               Policies
