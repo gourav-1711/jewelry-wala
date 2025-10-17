@@ -40,7 +40,6 @@ export default function Banner({ data }) {
                     alt={banner.title || "Jewellery Banner"}
                     fill
                     loading="lazy"
-                    priority={index === 0}
                     className="object-cover object-center"
                     sizes="100vw"
                     quality={90}
