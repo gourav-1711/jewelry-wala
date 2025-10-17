@@ -1,7 +1,10 @@
 'use client'
+import { Button } from '@/components/ui/button';
 import React from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function JewelleryAboutUs() {
+  const router = useRouter();
   return (
     <div className="bg-white min-h-screen">
 
@@ -63,9 +66,9 @@ export default function JewelleryAboutUs() {
 
             {/* CTA Button */}
             <div className="pt-4">
-              <button className="bg-gradient-to-r from-amber-800 to-amber-700 text-white px-12 py-3 rounded-lg font-sans text-md uppercase hover:shadow-lg hover:scale-105 transition-all duration-300 tracking-wide">
+              <Button onClick={() => router.push("/product-listing")} className="bg-gradient-to-r from-amber-800 to-amber-700 text-white px-12 py-3 rounded-lg font-sans text-md uppercase hover:shadow-lg hover:scale-105 transition-all duration-300 tracking-wide">
                 Explore Collection
-              </button>
+              </Button>
             </div>
           </div>
         </div>

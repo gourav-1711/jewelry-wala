@@ -1,9 +1,9 @@
 "use client";
 import Image from "next/image";
 import { Heart, ShoppingCart } from "lucide-react";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+import "swiper/css";
 
 const GiftItems = () => {
   const products = [
@@ -65,22 +65,6 @@ const GiftItems = () => {
     },
   ];
 
-  const settings = {
-    dots: false,
-    infinite: true,
-    speed: 700,
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    arrows: false,
-    autoplay: true,
-    autoplaySpeed: 3000,
-    pauseOnHover: true,
-    responsive: [
-      { breakpoint: 1024, settings: { slidesToShow: 3 } },
-      { breakpoint: 768, settings: { slidesToShow: 1 } },
-    ],
-  };
-
   return (
     <section
       className="py-12 bg-[#f8f8f8]"
@@ -88,7 +72,7 @@ const GiftItems = () => {
       itemScope
       itemType="https://schema.org/ItemList"
     >
-      <div className="max-w-[1300px] mx-auto px-4">
+      <div className="max-w-[1300px] w-full overflow-x-hidden mx-auto px-4">
         {/* Heading */}
         <div className="text-center mb-10">
           <h2 className="text-3xl font-serif text-[#8B4513] mb-3">
@@ -101,64 +85,98 @@ const GiftItems = () => {
         </div>
 
         {/* Slider */}
-        <Slider {...settings}>
-          {products.map((item) => (
-            <div key={item.id} className="px-3">
-              <article
-                itemProp="itemListElement"
-                itemScope
-                itemType="https://schema.org/Product"
-                className="bg-white rounded-xl shadow-md overflow-hidden group hover:shadow-lg transition-all duration-500"
-              >
-                <div className="relative overflow-hidden">
-                  <Image
-                    src={item.img}
-                    alt={item.name}
-                    width={400}
-                    height={300}
-                    className="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-                </div>
-
-                <div className="p-4">
-                  <h3
-                    className="text-gray-800 text-[16px] font-semibold mb-1 text-left"
-                    itemProp="name"
-                  >
-                    {item.name}
-                  </h3>
-
-                  <div className="flex items-center gap-2 mb-3">
-                    <span
-                      className="text-[#FF6F00] font-bold text-[17px]"
-                      itemProp="offers"
-                      itemScope
-                      itemType="https://schema.org/Offer"
-                    >
-                      <span itemProp="price">{item.price}</span>
-                    </span>
-                    <span className="text-gray-400 line-through text-[14px]">
-                      {item.oldPrice}
-                    </span>
+        <div className="py-5">
+          <Swiper
+            modules={[Autoplay]}
+            spaceBetween={24}
+            slidesPerView={1}
+            autoplay={{
+              delay: 3000,
+              disableOnInteraction: false,
+              pauseOnMouseEnter: true,
+            }}
+            speed={700}
+            loop={true}
+            observer={true}
+            observeParents={true}
+            breakpoints={{
+              320: {
+                slidesPerView: 1,
+                spaceBetween: 20,
+              },
+              450: {
+                slidesPerView: 1.8,
+                spaceBetween: 15,
+              },
+              768: {
+                slidesPerView: 3,
+                spaceBetween: 24,
+              },
+              1024: {
+                slidesPerView: 4,
+                spaceBetween: 24,
+              },
+            }}
+            className="!overflow-visible"
+          >
+            {products.map((item) => (
+              <SwiperSlide key={item.id}>
+                <article
+                  itemProp="itemListElement"
+                  itemScope
+                  itemType="https://schema.org/Product"
+                  className="bg-white rounded-xl shadow-md overflow-hidden group hover:shadow-lg transition-all duration-500"
+                >
+                  <div className="relative overflow-hidden">
+                    <Image
+                      src={item.img}
+                      alt={item.name}
+                      width={400}
+                      height={300}
+                      className="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
                   </div>
 
-                  <div className="flex items-center justify-center gap-3">
-                    <button
-                      aria-label="Add to Wishlist"
-                      className="p-2 border border-gray-300 rounded-full hover:bg-amber-100 transition flex-shrink-0"
+                  <div className="p-4">
+                    <h3
+                      className="text-gray-800 text-[16px] font-semibold mb-1 text-left"
+                      itemProp="name"
                     >
-                      <Heart size={16} className="text-gray-600" />
-                    </button>
+                      {item.name}
+                    </h3>
 
-                    <button className="flex-1 flex items-center justify-center gap-2 bg-[#8B4513] text-white py-2.5 rounded-lg text-[14px] hover:bg-[#a05d2b] transition-all duration-300">
-                      <ShoppingCart size={15} /> ADD
-                    </button>
+                    <div className="flex items-center gap-2 mb-3">
+                      <span
+                        className="text-[#FF6F00] font-bold text-[17px]"
+                        itemProp="offers"
+                        itemScope
+                        itemType="https://schema.org/Offer"
+                      >
+                        <span itemProp="price">{item.price}</span>
+                      </span>
+                      <span className="text-gray-400 line-through text-[14px]">
+                        {item.oldPrice}
+                      </span>
+                    </div>
+
+                    <div className="flex items-center justify-center gap-3">
+                      <button
+                        aria-label="Add to Wishlist"
+                        className="p-2 border border-gray-300 rounded-full hover:bg-amber-100 transition flex-shrink-0"
+                      >
+                        <Heart size={16} className="text-gray-600" />
+                      </button>
+
+                      <button className="flex-1 flex items-center justify-center gap-2 bg-[#8B4513] text-white py-2.5 rounded-lg text-[14px] hover:bg-[#a05d2b] transition-all duration-300">
+                        <ShoppingCart size={15} /> ADD
+                      </button>
+                    </div>
                   </div>
-                </div>
-              </article>
-            </div>
-          ))}
-        </Slider>
+                </article>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
 
         {/* View More Button */}
         <div className="text-center mt-10">

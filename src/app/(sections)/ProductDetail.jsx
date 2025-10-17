@@ -19,7 +19,7 @@ const productData = {
   dimensions: '1.5cm diameter',
   weight: '2.5g',
   stone: 'Diamond (0.15ct)',
-  images: ['/images/image1.jpg', '/images/image2.jpg', '/images/image3.jpg'],
+  images: ['/images/image1.jpeg', '/images/image2.jpg', '/images/image3.jpg'],
   rating: 4.8,
   reviews: 23,
 };

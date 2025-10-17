@@ -1,8 +1,10 @@
 "use client";
-import Slider from "react-slick";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
 import Image from "next/image";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+
+// Import Swiper styles
+import "swiper/css";
 
 export default function RoundCategorySlider() {
   const categories = [
@@ -18,21 +20,6 @@ export default function RoundCategorySlider() {
     { id: 10, title: "Saree Pin", image: "/images/cat10.jpeg" },
   ];
 
-  const settings = {
-    infinite: true,
-    autoplay: true,
-    speed: 2000,
-    autoplaySpeed: 1200,
-    slidesToShow: 6,
-    slidesToScroll: 1,
-    arrows: false,
-    responsive: [
-      { breakpoint: 1024, settings: { slidesToShow: 4 } },
-      { breakpoint: 768, settings: { slidesToShow: 2 } },
-      { breakpoint: 480, settings: { slidesToShow: 2 } },
-    ],
-  };
-
   return (
     <section className="w-full py-6">
       {/* Heading */}
@@ -46,36 +33,78 @@ export default function RoundCategorySlider() {
 
       {/* Slider */}
       <div className="max-w-[1200px] mx-auto py-2">
-        <Slider {...settings}>
+        <Swiper
+          modules={[Autoplay]}
+          spaceBetween={10}
+          slidesPerView={5}
+          loop={true}
+          autoplay={{
+            delay: 1200,
+            disableOnInteraction: false,
+          }}
+          speed={2000}
+          breakpoints={{
+            320: {
+              slidesPerView: 2.5,
+              spaceBetween: 5,
+            },
+            480: {
+              slidesPerView: 3.1,
+              spaceBetween: 5,
+            },
+            768: {
+              slidesPerView: 4.5,
+              spaceBetween: 5,
+            },
+            1024: {
+              slidesPerView: 6,
+              spaceBetween: 10,
+            },
+            1280: {
+              slidesPerView: 6.5,
+              spaceBetween: 10,
+            },
+          }}
+        >
           {categories.map((cat) => (
-            <article
-              key={cat.id}
-              className="flex flex-col items-center px-2 sm:px-3 group cursor-pointer"
-              itemScope
-              itemType="https://schema.org/Thing"
-            >
-              <div className="w-[140px] h-[140px] sm:w-[150px] sm:h-[150px] rounded-full overflow-hidden border-2 border-[rgb(192,149,120)]
-                              flex items-center justify-center mx-auto transition-all duration-300
-                              group-hover:scale-110 group-hover:shadow-2xl group-hover:border-yellow-400">
-                <Image
-                  src={cat.image}
-                  alt={cat.title}
-                  width={150}
-                  height={150}
-                  className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-110"
-                  itemProp="image"
-                />
-              </div>
-              <p
-                className="mt-2 text-sm sm:text-base font-medium text-gray-700 text-center leading-tight whitespace-nowrap
-                           transition-all duration-300 group-hover:text-yellow-600 group-hover:scale-105"
-                itemProp="name"
+            <SwiperSlide key={cat.id}>
+              <article
+              data-aos="fade-up"
+              data-aos-delay={cat.id * 50}
+                className="flex flex-col items-center px-2 sm:px-3 group cursor-pointer"
+                itemScope
+                itemType="https://schema.org/Thing"
               >
-                {cat.title}
-              </p>
-            </article>
+                <div
+                  className="
+                     rounded-full overflow-hidden border-2 border-[rgb(192,149,120)]
+                    flex items-center justify-center mx-auto transition-all duration-300
+                        group-hover:translate-y-[10px]  
+                         group-hover:border-yellow-400     
+                           group-hover:scale-[1.03] 
+                                    group-hover:shadow-[0_15px_30px_-5px_rgba(0,0,0,0.3)]    
+                                  "
+                >
+                  <Image
+                    src={cat.image}
+                    alt={cat.title}
+                    width={150}
+                    height={150}
+                    className="object-cover w-full h-full transition-transform duration-300  group-hover:scale-110 group-hover:shadow-2xl group-hover:border-yellow-400"
+                    itemProp="image"
+                  />
+                </div>
+                <p
+                  className="mt-2 text-sm sm:text-base font-medium text-gray-700 text-center leading-tight whitespace-nowrap
+                             transition-all duration-300 group-hover:text-yellow-600 group-hover:scale-105"
+                  itemProp="name"
+                >
+                  {cat.title}
+                </p>
+              </article>
+            </SwiperSlide>
           ))}
-        </Slider>
+        </Swiper>
       </div>
     </section>
   );

@@ -12,7 +12,7 @@ const wishlistItems = [
     name: 'Diamond Solitaire Ring',
     price: 1299.99,
     originalPrice: 1499.99,
-    image: '/ring1.jpg',
+    image: '/images/image1.jpg',
     rating: 4.8,
     inStock: true,
   },
@@ -21,7 +21,7 @@ const wishlistItems = [
     name: 'Gold Plated Necklace',
     price: 299.99,
     originalPrice: 349.99,
-    image: '/necklace1.jpg',
+    image: '/images/image2.jpg',
     rating: 4.5,
     inStock: true,
   },
@@ -30,7 +30,7 @@ const wishlistItems = [
     name: 'Pearl Earrings Set',
     price: 199.99,
     originalPrice: 249.99,
-    image: '/earrings1.jpg',
+    image: '/images/image3.jpg',
     rating: 4.7,
     inStock: false,
   },
@@ -66,7 +66,7 @@ export default function Wishlist() {
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif text-gray-900 mb-4">
+            <h1 className="text-2xl md:text-3xl lg:text-4xl font-serif text-gray-900 mb-4">
               Your Wishlist
             </h1>
             <div className="w-20 h-1 bg-amber-500 mx-auto mb-6"></div>

@@ -3,13 +3,13 @@ import React from 'react'
 
 
 export const metadata = {
-    title: "Category",
+    title: "Login-Signup",
     description:
-      "Category Page",
+      "Login-Signup Page",
   };
 
 export default function page() {
   return (
-    <div>No Code here create category component and import it</div>
+    <div>No Code here create about component and import it</div>
   )
 }

@@ -126,7 +126,6 @@
   }
 }
 
-
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
@@ -134,4 +133,95 @@
 
 .animate-fadeIn {
   animation: fadeIn 0.3s ease-out;
+}
+
+/* Style for both Prev and Next buttons */
+.swiper-button-next,
+.swiper-button-prev {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000 !important; 
+  padding: 10px;/* Sets the arrow icon color to black */
+  background: #fff !important; /* Sets the background to white */
+  border-radius: 50%; /* Makes the background circular */
+  width: 40px !important; /* Default Swiper size, adjust as needed */
+  height: 40px !important; /* Default Swiper size, adjust as needed */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for lift */
+  transition: all 0.3s ease;
+}
+
+/* Optional: To ensure the arrow icon is centered correctly inside the new circle */
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 12px !important; /* Adjust the arrow size if needed */
+}
+
+/* Optional: Hover effect */
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  transform: scale(1.1);
+  background: #f0f0f0 !important; /* Slight change on hover */
+}
+
+/* Style the overall pagination container */
+.swiper-pagination {
+  /* You can add padding or positioning here if needed, e.g., bottom: 10px; */
+}
+
+/* Style for all inactive dots */
+.swiper-pagination-bullet {
+  background: #fff !important; /* Sets the dot color to white */
+  opacity: 0.8 !important; /* Slightly transparent for the inactive state */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4) !important; /* Adds a shadow */
+  width: 10px !important; /* Standard size */
+  height: 10px !important; /* Standard size */
+  margin: 0 2px !important; /* Spacing between dots */
+  transition: all 0.3s ease;
+}
+
+/* Style for the active (main) dot */
+.swiper-pagination-bullet-active {
+  background: #fff !important; /* Ensures the active dot is also white */
+  opacity: 1 !important; /* Fully opaque */
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.6) !important; /* A more pronounced shadow */
+  width: 12px !important; /* Makes the active dot bigger */
+  height: 12px !important; /* Makes the active dot bigger */
+}
+
+/* Custom keyframes for the animation */
+@keyframes megaMenuIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px); /* Slightly lower than final position */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* This class should be applied to the Card */
+.mega-menu-enter {
+  animation: megaMenuIn 0.3s ease-out forwards;
+
+}
+
+img{
+  user-select: none;
+}
+
+::selection {
+    background-color: gold; /* Use the color name 'gold' or a specific hex code like #FFD700 */
+    color: #000000;         /* Optional: Set the text color to black for high contrast */
+}
+
+/* For older WebKit browsers (like some Safari versions) */
+::-webkit-selection {
+    background-color: gold;
+    color: #000000;
+}
+
+button{
+  cursor: pointer;
 }

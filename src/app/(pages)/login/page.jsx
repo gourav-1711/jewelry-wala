@@ -1,11 +1,14 @@
-import React from 'react'
-import Login from '@/app/(sections)/Login'
-
-
+import React from "react";
+import Login from "@/app/(sections)/Login";
+import { siteConfig } from "@/lib/utils";
 
 export const metadata = {
-  title: "Login - YourApp",
-  description: "Login to YourApp for a seamless experience",
+  title: `Login - ${siteConfig.name}`,
+  description: `Login to ${siteConfig.name} to access your account, track orders, and manage your wishlist.`,
+  robots: {
+    index: false,
+    follow: true,
+  },
 };
 
 export default function page() {
@@ -13,5 +16,5 @@ export default function page() {
     <div>
       <Login />
     </div>
-  )
+  );
 }
