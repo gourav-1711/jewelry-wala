@@ -37,7 +37,7 @@ export default function ScrollToTop() {
         onClick={scrollToTop}
         className={cn(
           "bg-white backdrop-blur-sm rounded-full p-2 shadow-lg transition-all duration-300 ease-in-out",
-          "hover:bg-white hover:scale-115 focus:outline-none focus:ring-2 focus:ring-red-300 focus:ring-offset-2",
+          "hover:bg-white hover:scale-115 focus:outline-none focus:ring-2 focus:ring-amber-300 focus:ring-offset-2",
           "dark:bg-gray-800/80 dark:hover:bg-gray-800",
           isVisible
             ? "opacity-100 translate-y-0"
@@ -45,7 +45,7 @@ export default function ScrollToTop() {
         )}
         aria-label="Scroll to top"
       >
-        <ChevronUp className="h-5 w-5 text-red-500 hover:text-red-600 dark:text-red-400 dark:hover:text-red-300" />
+        <ChevronUp className="h-5 w-5 text-amber-500 hover:text-amber-600 dark:text-amber-400 dark:hover:text-amber-300" />
       </Button>
     </div>
   );

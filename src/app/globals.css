@@ -1,29 +1,9 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-/* Prevent horizontal overflow and fix AOS issues */
-html,
-body {
-  max-width: 100%;
-  overflow-x: hidden;
+html {
+  scroll-behavior: smooth;
 }
-
-/* Fix for AOS elements causing horizontal scroll */
-[data-aos] {
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-}
-
-/* Ensure all elements respect container width */
-* {
-  box-sizing: border-box;
-}
-
-/* Fix for AOS elements with transforms */
-body.aos-animate [data-aos] {
-  pointer-events: auto;
-}
-
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -179,6 +159,18 @@ body.aos-animate [data-aos] {
   transition: all 0.3s ease;
 }
 
+@media (max-width: 768px) {
+  .swiper-button-next,
+  .swiper-button-prev {
+    width: 25px !important;
+    height: 25px !important;
+  }
+  .swiper-button-next::after,
+  .swiper-button-prev::after {
+    font-size: 18px !important;
+  }
+}
+
 /* Optional: To ensure the arrow icon is centered correctly inside the new circle */
 .swiper-button-next::after,
 .swiper-button-prev::after {
@@ -196,7 +188,6 @@ body.aos-animate [data-aos] {
 .swiper-pagination-bullet {
   background: #fff !important; /* Sets the dot color to white */
   opacity: 0.8 !important; /* Slightly transparent for the inactive state */
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4) !important; /* Adds a shadow */
   width: 10px !important; /* Standard size */
   height: 10px !important; /* Standard size */
   margin: 0 2px !important; /* Spacing between dots */
@@ -207,7 +198,6 @@ body.aos-animate [data-aos] {
 .swiper-pagination-bullet-active {
   background: #fff !important; /* Ensures the active dot is also white */
   opacity: 1 !important; /* Fully opaque */
-  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.6) !important; /* A more pronounced shadow */
   width: 12px !important; /* Makes the active dot bigger */
   height: 12px !important; /* Makes the active dot bigger */
 }
@@ -246,4 +236,7 @@ img {
 
 button {
   cursor: pointer;
+}
+button:disabled {
+  cursor: not-allowed;
 }

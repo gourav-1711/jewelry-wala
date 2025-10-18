@@ -13,14 +13,14 @@ export default function Footer() {
       name: "Diamond Ring",
       price: "$2,499",
       image: "/images/image1.jpg",
-      href: "/products/diamond-ring",
+      href: "/product-details/diamond-ring",
     },
     {
       id: 2,
       name: "Gold Necklace",
       price: "$1,899",
       image: "/images/image2.jpg",
-      href: "/products/gold-necklace",
+      href: "/product-details/gold-necklace",
     },
   ];
 
@@ -51,9 +51,6 @@ export default function Footer() {
               <div
                 key={title}
                 className="flex items-center gap-3 p-3 rounded-lg hover:bg-white transition-colors duration-200"
-                data-aos="fade-up"
-                data-aos-delay={index * 50}
-                data-aos-duration="400"
               >
                 <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-amber-400 to-yellow-500 flex items-center justify-center">
                   <Icon className="w-5 h-5 text-white" />
@@ -74,11 +71,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-8 lg:gap-6">
           {/* Brand & Newsletter - Takes 2 columns on large screens */}
-          <div
-            className="sm:col-span-2 lg:col-span-2"
-            data-aos="fade-right"
-            data-aos-duration="800"
-          >
+          <div className="sm:col-span-2 lg:col-span-2">
             <div className="relative group inline-block mb-4">
               <span className="text-3xl md:text-4xl font-extrabold bg-gradient-to-r from-yellow-700 via-yellow-500 to-yellow-700 bg-clip-text text-transparent tracking-wider drop-shadow-sm font-serif transition-transform duration-300 group-hover:scale-[1.03]">
                 Jewellery
@@ -97,9 +90,6 @@ export default function Footer() {
             <form
               className="flex max-w-sm mb-6"
               onSubmit={(e) => e.preventDefault()}
-              data-aos="fade-up"
-              data-aos-delay="200"
-              data-aos-duration="600"
             >
               <Input
                 type="email"
@@ -116,12 +106,7 @@ export default function Footer() {
             </form>
 
             {/* Social Media */}
-            <div
-              className="flex gap-2"
-              data-aos="fade-up"
-              data-aos-delay="150"
-              data-aos-duration="400"
-            >
+            <div className="flex gap-2">
               {[
                 { Icon: FaFacebookF, label: "Facebook", href: "#" },
                 { Icon: FaInstagram, label: "Instagram", href: "#" },
@@ -149,12 +134,7 @@ export default function Footer() {
           </div>
 
           {/* Shop Categories */}
-          <div
-            className="sm:col-span-1 lg:col-span-1"
-            data-aos="fade-up"
-            data-aos-delay="50"
-            data-aos-duration="500"
-          >
+          <div className="sm:col-span-1 lg:col-span-1">
             <h3 className="font-bold text-base mb-4 text-gray-900 uppercase tracking-wide border-b-2 border-yellow-400 pb-2 inline-block">
               Shop
             </h3>
@@ -182,12 +162,7 @@ export default function Footer() {
           </div>
 
           {/* Customer Service */}
-          <div
-            className="sm:col-span-1 lg:col-span-1"
-            data-aos="fade-up"
-            data-aos-delay="200"
-            data-aos-duration="500"
-          >
+          <div className="sm:col-span-1 lg:col-span-1">
             <h3 className="font-bold text-base mb-4 text-gray-900 uppercase tracking-wide border-b-2 border-yellow-400 pb-2 inline-block">
               Help
             </h3>
@@ -215,12 +190,7 @@ export default function Footer() {
           </div>
 
           {/* Policies & Info */}
-          <div
-            className="sm:col-span-1 lg:col-span-1"
-            data-aos="fade-up"
-            data-aos-delay="150"
-            data-aos-duration="500"
-          >
+          <div className="sm:col-span-1 lg:col-span-1">
             <h3 className="font-bold text-base mb-4 text-gray-900 uppercase tracking-wide border-b-2 border-yellow-400 pb-2 inline-block">
               Policies
             </h3>
@@ -248,11 +218,7 @@ export default function Footer() {
           </div>
 
           {/* Contact & Featured Products */}
-          <div
-            className="sm:col-span-2 lg:col-span-1"
-            data-aos="fade-left"
-            data-aos-duration="800"
-          >
+          <div className="sm:col-span-2 lg:col-span-1">
             <h3 className="font-bold text-base mb-4 text-gray-900 uppercase tracking-wide border-b-2 border-yellow-400 pb-2 inline-block">
               Contact
             </h3>
@@ -293,15 +259,13 @@ export default function Footer() {
                   key={product.id}
                   href={product.href}
                   className="flex items-center gap-3 p-2 rounded-lg border border-gray-200 hover:border-yellow-400 hover:shadow-md transition-all duration-200 group bg-white"
-                  data-aos="fade-up"
-                  data-aos-delay={index * 100}
-                  data-aos-duration="500"
                 >
                   <div className="relative w-16 h-16 flex-shrink-0 rounded-md overflow-hidden bg-gray-100">
                     <Image
                       src={product.image}
                       alt={product.name}
                       fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       className="object-cover group-hover:scale-110 transition-transform duration-300"
                     />
                   </div>

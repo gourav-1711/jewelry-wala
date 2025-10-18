@@ -1,6 +1,7 @@
 import ProductListing from "@/app/(sections)/ProductListing";
 import React from "react";
 import { siteConfig } from "@/lib/utils";
+import FilterSidebar from "../FilterSidebar";
 
 export const metadata = {
   title: `Shop Jewellery Online - ${siteConfig.name} | Gold, Silver & Diamond Collection`,
@@ -21,5 +22,18 @@ export const metadata = {
 };
 
 export default function page() {
-  return <ProductListing />;
+  return (
+    <div className="bg-[#f8f8f8]">
+      <div className="max-w-7xl mx-auto px-2 md:px-4 lg:px-8">
+        <div className="flex  lg:gap-8 py-8">
+          <div className="">
+            <FilterSidebar />
+          </div>
+          <main className="flex-1">
+            <ProductListing />
+          </main>
+        </div>
+      </div>
+    </div>
+  );
 }

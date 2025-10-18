@@ -5,9 +5,9 @@ import { Toaster } from "sonner";
 import Header from "@/components/comman/Header";
 import Footer from "@/components/comman/Footer";
 import { siteConfig, defaultMetadata, getStructuredAddress } from "@/lib/utils";
-import AosProvider from "@/lib/AosProvider";
 import { cookies } from "next/headers";
 import { cache } from "react";
+import ScrollToTop from "@/components/ui/scroll-to-top";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -218,16 +218,11 @@ export default async function RootLayout({ children }) {
       </head>
       <body className="min-h-screen bg-background font-sans antialiased flex flex-col">
         <Client>
-          <AosProvider>
-            <div className="flex flex-col min-h-screen">
-              <div className="sticky top-0 z-50 w-full">
-                <Header data={user} cart={cart} wishlist={wishlist} />
-              </div>
-              <main className="flex-1">{children}</main>
-              <Footer />
-            </div>
-            <Toaster position="top-center" richColors closeButton />
-          </AosProvider>
+          <Header data={user} cart={cart} wishlist={wishlist} />
+          <main className="flex-1 ">{children}</main>
+          <Footer />
+          <ScrollToTop/>
+          <Toaster richColors closeButton />
         </Client>
       </body>
     </html>

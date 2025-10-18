@@ -60,9 +60,7 @@ const ShopByPrice = () => {
       <div className="max-w-6xl mx-auto">
         {/* Heading */}
         <div
-          data-aos="fade-up"
-          data-aos-delay="100"
-          data-aos-duration="300"
+         
           className="text-center mb-6"
         >
           <h2 className="text-3xl font-serif text-slate-800 mb-3 tracking-wide">
@@ -75,9 +73,7 @@ const ShopByPrice = () => {
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-6 px-2">
           {priceCategories.map((item, index) => (
             <div
-              data-aos="fade-up"
-              data-aos-delay={index * 100}
-              data-aos-duration="300"
+             
               key={index}
               className="group bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer
                          border border-slate-200 hover:border-slate-300 overflow-hidden hover:-translate-y-1 p-4 flex flex-col items-center justify-center min-h-[140px]"
@@ -105,9 +101,7 @@ const ShopByPrice = () => {
 
         {/* Decorative bottom border */}
         <div
-          data-aos="fade-up"
-          data-aos-delay="100"
-          data-aos-duration="300"
+        
           className="h-px bg-gradient-to-r from-transparent via-slate-300 to-transparent mt-6"
         ></div>
       </div>

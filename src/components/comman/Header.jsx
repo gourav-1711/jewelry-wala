@@ -47,6 +47,7 @@ import { PlaceholdersAndVanishInput } from "../ui/placeholders-and-vanish-input"
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import { setProfile } from "@/redux/features/auth";
+import { useRouter } from "next/navigation";
 
 // --- Navigation Data Structure (Centralized and Nested) ---
 const navigationData = [
@@ -135,22 +136,22 @@ const navigationData = [
   },
   {
     name: "New Arrivals",
-    href: "/product-listing/new-arrivals",
+    href: "/category/new-arrivals",
     hasChildren: false,
   },
   {
     name: "Gift Items",
-    href: "/product-listing/gift-items",
+    href: "/category/gift-items",
     hasChildren: false,
   },
   {
     name: "Personalised Jewellery",
-    href: "/product-listing/personalized",
+    href: "/category/personalized",
     hasChildren: false,
   },
   {
     name: "Track Your Order",
-    href: "/product-listing/order-track",
+    href: "order-track",
     hasChildren: false,
   },
   { name: "Contact Us", href: "/contact", hasChildren: false },
@@ -172,9 +173,11 @@ export default function Header({ data, cart, wishlist }) {
   const [isOffcanvasOpen, setIsOffcanvasOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [showMegaMenu, setShowMegaMenu] = useState(false);
+
   const cartCount = cart?._data?.items?.length || 0;
   const wishlistCount = wishlist?._data?.items?.length || 0;
+
+  const router = useRouter();
 
   const isLoggedIn = useSelector((state) => state.auth.isLogin);
   const user = useSelector((state) => state.auth.details);
@@ -196,14 +199,6 @@ export default function Header({ data, cart, wishlist }) {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  useEffect(() => {
-    if (showMegaMenu) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-  }, [showMegaMenu]);
 
   // Helper function to create slug from string
   const createSlug = (str) => str.toLowerCase().replace(/\s+/g, "-");
@@ -315,317 +310,304 @@ export default function Header({ data, cart, wishlist }) {
     </nav>
   );
 
-  // Renders the full desktop mega menu content
-  const renderDesktopMegaMenu = () => (
-    <Card
-      onMouseEnter={() => setShowMegaMenu(true)}
-      onMouseLeave={() => setShowMegaMenu(false)}
-      className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[1100px] max-w-[100%] bg-white/95 backdrop-blur-xl shadow-2xl rounded-xl p-8 mt-4 z-[999] border-2 border-amber-200 overflow-hidden fade-in-15 fade-out-15 transition-all duration-300 mega-menu-enter"
-    >
-      <div className="grid grid-cols-5 gap-8">
-        {navigationData
-          .find((c) => c.name === "Shop By Category")
-          ?.megaMenu.map((menu, i) => (
-            <div key={i} className="group/col">
-              <Link href={menu.href}>
-                <h4 className="font-bold text-gray-800 mb-4 border-b-2 border-amber-400/50 pb-2 text-lg hover:text-amber-600 transition-colors">
-                  {menu.title}
-                </h4>
-              </Link>
-              <div className="space-y-5">
-                {menu.subGroups.map((subcat, j) => (
-                  <div key={j}>
-                    <Badge
-                      variant="outline"
-                      className="text-xs font-bold text-amber-600 border-amber-400 mb-2.5 bg-amber-50"
-                    >
-                      {subcat.name}
-                    </Badge>
-                    <ul className="space-y-2 text-gray-600 text-sm">
-                      {subcat.items.map((item, k) => (
-                        <li key={k}>
-                          <Link
-                            href={`/category/${createSlug(item)}`}
-                            className="block hover:text-amber-600 cursor-pointer transition-all duration-200 hover:translate-x-0.5"
-                          >
-                            {item}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
-      </div>
-    </Card>
-  );
-
   return (
-    <header className="w-full bg-white/90 backdrop-blur-xl">
-      {/* Top Bar */}
-      <div
-        className={`w-full text-center bg-gradient-to-r from-amber-600 to-amber-500 text-white text-sm py-2 transition-all duration-300 ${
-          isScrolled ? "opacity-0 h-0 overflow-hidden" : "opacity-100"
-        }`}
-      >
-        <span>Free Shipping above ₹2000 | Welcome to Jewellery Wala</span>
-      </div>
+    <>
+      <header className="w-full bg-white/90 backdrop-blur-xl z-[100] sticky top-0 left-0 border-b border-amber-200 shadow-sm">
+        {/* Top Bar */}
+        <div
+          className={`w-full  text-center bg-gradient-to-r from-amber-600 to-amber-500 text-white text-sm py-2 transition-all duration-300 `}
+        >
+          <span>Free Shipping above ₹2000 | Welcome to Jewellery Wala</span>
+        </div>
 
-      {/* Main Header Bar */}
-      <div
-        className={`w-full border-b border-amber-200 transition-all duration-300 ${
-          isScrolled ? "py-2" : "py-4" // Visual shrinking effect
-        }`}
-      >
-        <div className="flex items-center justify-between px-4 md:px-6 max-w-7xl mx-auto">
-          {/* Mobile Menu Button (Left) */}
-          <Sheet open={isOffcanvasOpen} onOpenChange={setIsOffcanvasOpen}>
-            <SheetTrigger asChild>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="md:hidden hover:bg-amber-50 hover:text-amber-600 shrink-0"
-                aria-label="Open navigation menu"
-              >
-                <Menu size={24} />
-              </Button>
-            </SheetTrigger>
-
-            {/* Mobile Sheet Menu Content */}
-            <SheetContent side="left" className="w-[80vw] sm:w-80 bg-white p-0">
-              <SheetHeader className="border-b p-4">
-                <SheetTitle className="text-lg font-semibold text-gray-900">
-                  Jewellery Wala Menu
-                </SheetTitle>
-              </SheetHeader>
-              {renderMobileNav()}
-            </SheetContent>
-          </Sheet>
-
-          {/* Logo (Center-Left) */}
-          <Link href="/">
-            <Image
-              src="/images/logo.png"
-              alt="Jewellery Wala"
-              width={100}
-              height={100}
-              className={`w-40 cursor-pointer h-12 object-fill  ${
-                isScrolled ? "h-8" : ""
-              }`}
-            />
-          </Link>
-
-          {/* Desktop Search (Center) */}
-          <div className="hidden lg:block flex-1 px-6">
-            <SearchBar className="w-full max-w-xl mx-auto group" />
-          </div>
-
-          {/* Icons (Right) */}
-          <div className="flex items-center space-x-2 md:space-x-4 shrink-0">
-            {/* Wishlist Icon */}
-            <Link href="/wishlist" className="hidden md:flex">
-              <Button
-                variant="ghost"
-                size="icon"
-                className="relative hover:bg-amber-50 hover:text-amber-600"
-                aria-label="View wishlist"
-              >
-                <Heart
-                  fill={wishlistCount > 0 ? "#f5a22f" : "#FFF"}
-                  size={20}
-                />
-                {wishlistCount > 0 && (
-                  <Badge className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 bg-amber-600 hover:bg-amber-700 text-[10px] shadow-sm">
-                    {wishlistCount}
-                  </Badge>
-                )}
-              </Button>
-            </Link>
-
-            {/* Cart Icon */}
-            <Link href="/cart" className="hidden md:flex">
-              <Button
-                variant="ghost"
-                size="icon"
-                className="relative hover:bg-amber-50 hover:text-amber-600"
-                aria-label="View shopping bag"
-              >
-                <ShoppingBag
-                  fill={cartCount > 0 ? "#f5a22f" : "#FFF"}
-                  size={20}
-                />
-                {cartCount > 0 && (
-                  <Badge className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 bg-amber-600 hover:bg-amber-700 text-[10px] shadow-sm">
-                    {cartCount}
-                  </Badge>
-                )}
-              </Button>
-            </Link>
-
-            {/* Mobile Search Toggle */}
+        {/* Main Header Bar */}
+        <div
+          className={`w-full border-b  bg-white border-amber-200 transition-all duration-300 ${
+            isScrolled ? "py-2  left-0" : "py-4 " // Visual shrinking effect
+          }`}
+        >
+          <div className="flex items-center justify-between px-4 md:px-6 w-full">
             <Button
               variant="ghost"
               size="icon"
-              className="lg:hidden hover:bg-amber-50 hover:text-amber-600"
-              onClick={() => setIsSearchOpen(!isSearchOpen)}
-              aria-expanded={isSearchOpen}
-              aria-controls="mobile-search-bar"
-              aria-label="Toggle search bar"
+              className="md:hidden hover:bg-amber-50 hover:text-amber-600 shrink-0"
+              aria-label="Open navigation menu"
+              onClick={() => setIsOffcanvasOpen(true)}
             >
-              <Search size={20} />
+              <Menu size={24} />
             </Button>
 
-            {/* User Dropdown */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
+            {/* Logo (Center-Left) */}
+            <Link href="/">
+              <Image
+                src="/images/logo.png"
+                alt="Jewellery Wala"
+                width={100}
+                height={100}
+                className={`w-40 cursor-pointer h-12 object-fill  ${
+                  isScrolled ? "h-8" : ""
+                }`}
+              />
+            </Link>
+
+            {/* Desktop Search (Center) */}
+            <div className="hidden lg:block flex-1 px-6">
+              <SearchBar className="w-full max-w-xl mx-auto group" />
+            </div>
+
+            {/* Icons (Right) */}
+            <div className="flex items-center space-x-2 md:space-x-4 shrink-0">
+              {/* Wishlist Icon */}
+              <Link href="/wishlist" className="hidden md:flex">
                 <Button
                   variant="ghost"
                   size="icon"
                   className="relative hover:bg-amber-50 hover:text-amber-600"
-                  aria-label="User account menu"
+                  aria-label="View wishlist"
                 >
-                  {user?.avatar ? (
-                    <Image
-                      src={user.avatar}
-                      alt="User Avatar"
-                      width={20}
-                      height={20}
-                      className="rounded-full"
-                    />
-                  ) : (
-                    <UserIcon size={20} />
-                  )}
-                  {isLoggedIn && (
-                    <span className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full border-2 border-white animate-pulse" />
+                  <Heart
+                    fill={wishlistCount > 0 ? "#f5a22f" : "#FFF"}
+                    size={20}
+                  />
+                  {wishlistCount > 0 && (
+                    <Badge className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 bg-amber-600 hover:bg-amber-700 text-[10px] shadow-sm">
+                      {wishlistCount}
+                    </Badge>
                   )}
                 </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent
-                className="w-64 bg-white/95 backdrop-blur-xl border-2 border-amber-200 shadow-xl"
-                align="end"
-              >
-                {/* ... (User Dropdown Content is fine, keeping it concise) ... */}
-                {isLoggedIn ? (
-                  <>
-                    <DropdownMenuLabel className="bg-gradient-to-r from-amber-50 to-orange-50 py-3">
-                      <p className="text-sm font-semibold text-gray-800">
-                        Welcome back! {user?.name}
-                      </p>
-                      <p className="text-xs text-amber-600 mt-1 font-normal">
-                        {user?.email}
-                      </p>
-                    </DropdownMenuLabel>
-                    <DropdownMenuSeparator className="bg-amber-200" />
-                    {userMenuItems.map((item, idx) => (
-                      <DropdownMenuItem
-                        key={idx}
-                        asChild
-                        className="cursor-pointer hover:bg-amber-50 hover:text-amber-600 py-3"
-                      >
-                        <Link href={item.href} className="flex items-center">
-                          <item.icon className="mr-3" size={18} />
-                          <span className="font-medium">{item.label}</span>
-                        </Link>
-                      </DropdownMenuItem>
-                    ))}
-                    <DropdownMenuSeparator className="bg-amber-200" />
-                    <DropdownMenuItem className="cursor-pointer text-red-600 hover:bg-red-50 hover:text-red-700 py-3">
-                      <LogOut
-                        onClick={handleLogout}
-                        className="mr-3"
-                        size={18}
-                      />
-                      <span className="font-medium">Logout</span>
-                    </DropdownMenuItem>
-                  </>
-                ) : (
-                  <div className="px-2 py-4">
-                    <p className="text-sm text-gray-600 mb-4 font-medium text-center">
-                      Sign in to your account
-                    </p>
-                    <div className="space-y-2 flex flex-col gap-1">
-                      <Link href="/login" className="cursor-pointer">
-                        <Button className="w-full bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-700 hover:to-amber-600 shadow-md">
-                          Sign In
-                        </Button>
-                      </Link>
-                      <Link className="cursor-pointer" href="/signup">
-                        <Button
-                          variant="outline"
-                          className="w-full border-2 border-amber-600 text-amber-600 hover:bg-amber-50"
-                        >
-                          Register
-                        </Button>
-                      </Link>
-                    </div>
-                  </div>
-                )}
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
-        </div>
-
-        {/* Mobile Search Bar (Conditionally Visible) */}
-        <div
-          id="mobile-search-bar"
-          className={` lg:hidden overflow-hidden transition-all duration-300 ${
-            isSearchOpen
-              ? "max-h-20 opacity-100 px-4 py-1 mt-3"
-              : "max-h-0 opacity-0"
-          }`}
-        >
-          <SearchBar className="relative" />
-        </div>
-      </div>
-
-      {/* Desktop Main Navigation Bar (Separate Row, Not Sticky) */}
-      <nav
-        className={`hidden md:flex flex-wrap justify-center font-medium space-x-8 text-sm py-3 border-b border-amber-100/50 bg-white/95 backdrop-blur-sm z-40`}
-      >
-        {navigationData.map((cat, idx) => (
-          <div key={idx} className="relative group/navlink">
-            {/* Nav Link / Mega Menu Trigger */}
-            {!cat.hasChildren ? (
-              <Link
-                href={cat.href}
-                className="relative hover:text-amber-700 transition-colors text-[15px] font-serif whitespace-nowrap pb-1.5 text-gray-700 group-hover/navlink:text-amber-600"
-              >
-                {cat.name}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-amber-600 to-amber-400 transition-all duration-300 group-hover/navlink:w-full"></span>
               </Link>
-            ) : (
-              <button
-                onMouseEnter={() => setShowMegaMenu(true)}
-                onMouseLeave={() => setShowMegaMenu(false)}
-                className="relative hover:text-amber-700 transition-colors text-[15px] font-serif whitespace-nowrap pb-1.5 text-gray-700 flex items-center gap-1 group-hover/navlink:text-amber-600"
-                aria-haspopup="menu"
-                aria-expanded={showMegaMenu}
-              >
-                {cat.name}
-                <ChevronDown
-                  className={`w-3.5 h-3.5 transition-transform duration-300 ${
-                    showMegaMenu ? "rotate-180" : ""
-                  }`}
-                />
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-amber-600 to-amber-400 transition-all duration-300 group-hover/navlink:w-full"></span>
-              </button>
-            )}
-          </div>
-        ))}
-      </nav>
 
-      {/* Backdrop when mega menu open */}
-      {showMegaMenu && (
-        <div
-          className="fixed inset-0 bg-white/10 backdrop-blur-sm z-30"
-          onClick={() => setShowMegaMenu(false)}
-        />
-      )}
-      {/* Mega Menu Content */}
-      {showMegaMenu && renderDesktopMegaMenu()}
-    </header>
+              {/* Cart Icon */}
+              <Link href="/cart" className="hidden md:flex">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="relative hover:bg-amber-50 hover:text-amber-600"
+                  aria-label="View shopping bag"
+                >
+                  <ShoppingBag
+                    fill={cartCount > 0 ? "#f5a22f" : "#FFF"}
+                    size={20}
+                  />
+                  {cartCount > 0 && (
+                    <Badge className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 bg-amber-600 hover:bg-amber-700 text-[10px] shadow-sm">
+                      {cartCount}
+                    </Badge>
+                  )}
+                </Button>
+              </Link>
+
+              {/* Mobile Search Toggle */}
+              <Button
+                variant="ghost"
+                size="icon"
+                className="lg:hidden hover:bg-amber-50 hover:text-amber-600"
+                onClick={() => setIsSearchOpen(!isSearchOpen)}
+                aria-expanded={isSearchOpen}
+                aria-controls="mobile-search-bar"
+                aria-label="Toggle search bar"
+              >
+                <Search size={20} />
+              </Button>
+
+              {/* User Dropdown */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="relative hover:bg-amber-50 hover:text-amber-600"
+                    aria-label="User account menu"
+                  >
+                    {user?.avatar ? (
+                      <Image
+                        src={user.avatar}
+                        alt="User Avatar"
+                        width={20}
+                        height={20}
+                        className="rounded-full"
+                      />
+                    ) : (
+                      <UserIcon size={20} />
+                    )}
+                    {isLoggedIn && (
+                      <span className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full border-2 border-white animate-pulse" />
+                    )}
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent
+                  className="w-64 bg-white/95 backdrop-blur-xl border-2 border-amber-200 shadow-xl"
+                  align="end"
+                >
+                  {/* ... (User Dropdown Content is fine, keeping it concise) ... */}
+                  {isLoggedIn ? (
+                    <>
+                      <DropdownMenuLabel className="bg-gradient-to-r from-amber-50 to-orange-50 py-3">
+                        <p className="text-sm font-semibold text-gray-800">
+                          Welcome back! {user?.name}
+                        </p>
+                        <p className="text-xs text-amber-600 mt-1 font-normal">
+                          {user?.email}
+                        </p>
+                      </DropdownMenuLabel>
+                      <DropdownMenuSeparator className="bg-amber-200" />
+                      {userMenuItems.map((item, idx) => (
+                        <DropdownMenuItem
+                          key={idx}
+                          asChild
+                          className="cursor-pointer hover:bg-amber-50 hover:text-amber-600 py-3"
+                        >
+                          <Link href={item.href} className="flex items-center">
+                            <item.icon className="mr-3" size={18} />
+                            <span className="font-medium">{item.label}</span>
+                          </Link>
+                        </DropdownMenuItem>
+                      ))}
+                      <DropdownMenuSeparator className="bg-amber-200" />
+                      <DropdownMenuItem className="cursor-pointer text-red-600 hover:bg-red-50 hover:text-red-700 py-3">
+                        <LogOut
+                          onClick={handleLogout}
+                          className="mr-3"
+                          size={18}
+                        />
+                        <span className="font-medium">Logout</span>
+                      </DropdownMenuItem>
+                    </>
+                  ) : (
+                    <div className="px-2 py-4">
+                      <p className="text-sm text-gray-600 mb-4 font-medium text-center">
+                        Sign in to your account
+                      </p>
+                      <div className="space-y-2 flex flex-col gap-1">
+                        <Link href="/login" className="cursor-pointer">
+                          <Button className="w-full bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-700 hover:to-amber-600 shadow-md">
+                            Sign In
+                          </Button>
+                        </Link>
+                        <Link className="cursor-pointer" href="/signup">
+                          <Button
+                            variant="outline"
+                            className="w-full border-2 border-amber-600 text-amber-600 hover:bg-amber-50"
+                          >
+                            Register
+                          </Button>
+                        </Link>
+                      </div>
+                    </div>
+                  )}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
+          </div>
+
+          {/* Mobile Search Bar (Conditionally Visible) */}
+          <div
+            id="mobile-search-bar"
+            className={` lg:hidden overflow-hidden transition-all duration-300 ${
+              isSearchOpen
+                ? "max-h-20 opacity-100 px-4 py-1 mt-3"
+                : "max-h-0 opacity-0"
+            }`}
+          >
+            <SearchBar className="relative" />
+          </div>
+        </div>
+
+        <nav
+          className={`hidden md:flex flex-wrap justify-center font-medium space-x-8 text-sm py-3 border-b border-amber-100/50 bg-white/95 backdrop-blur-sm  `}
+        >
+          {navigationData.map((cat, idx) => (
+            <div key={idx}>
+              {/* Nav Link / Mega Menu Trigger */}
+              {!cat.hasChildren ? (
+                <Link
+                  href={cat.href}
+                  className="relative hover:text-amber-700 transition-colors text-[15px] font-serif whitespace-nowrap pb-1.5 text-gray-700 group"
+                >
+                  {cat.name}
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-amber-600 to-amber-400 transition-all duration-300 group-hover:w-full"></span>
+                </Link>
+              ) : (
+                <div className="relative group">
+                  <button
+                    onClick={() => router.push("/category/new")}
+                    className="relative hover:text-amber-700 transition-colors text-[15px] font-serif whitespace-nowrap pb-1.5 text-gray-700 flex items-center gap-1"
+                    aria-haspopup="menu"
+                  >
+                    {cat.name}
+                    <ChevronDown className="w-3.5 h-3.5 transition-transform duration-300 group-hover:rotate-180" />
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-amber-600 to-amber-400 transition-all duration-300 group-hover:w-full"></span>
+                  </button>
+                  {/* Backdrop when mega menu open - using peer/group pattern */}
+                  <div className="hidden group-hover:block fixed top-0 left-0 right-0 bottom-0 bg-white/10 max-w-[100%] w-screen h-screen backdrop-blur-md z-[998] pointer-events-none" />
+
+                  {/* Mega Menu Content - Shows on group hover */}
+                  <div className="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-300 fixed left-1/2 -translate-x-1/2 top-full pt-2 z-[999] hover:visible hover:opacity-100">
+                    <Card className="w-[1100px] max-w-[90vw] bg-white/95 backdrop-blur-xl shadow-2xl rounded-xl p-8 border-2 border-amber-200 hover:border-amber-400">
+                      <div className="grid grid-cols-5 gap-8">
+                        {navigationData
+                          .find((c) => c.name === "Shop By Category")
+                          ?.megaMenu.map((menu, i) => (
+                            <div key={i}>
+                              <Link href={menu.href}>
+                                <h4 className="font-bold text-gray-800 mb-4 border-b-2 border-amber-400/50 pb-2 text-lg hover:text-amber-600 transition-colors">
+                                  {menu.title}
+                                </h4>
+                              </Link>
+                              <div className="space-y-5">
+                                {menu.subGroups.map((subcat, j) => (
+                                  <div key={j}>
+                                    <Badge
+                                      variant="outline"
+                                      className="text-xs font-bold text-amber-600 border-amber-400 mb-2.5 bg-amber-50"
+                                    >
+                                      {subcat.name}
+                                    </Badge>
+                                    <ul className="space-y-2 text-gray-600 text-sm">
+                                      {subcat.items.map((item, k) => (
+                                        <li key={k}>
+                                          <Link
+                                            href={`/category/${createSlug(
+                                              item
+                                            )}`}
+                                            className="block hover:text-amber-600 cursor-pointer transition-all duration-200 hover:translate-x-0.5"
+                                          >
+                                            {item}
+                                          </Link>
+                                        </li>
+                                      ))}
+                                    </ul>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          ))}
+                      </div>
+                    </Card>
+                  </div>
+                </div>
+              )}
+            </div>
+          ))}
+        </nav>
+      </header>
+
+      {/* Mobile Menu Button (Left) */}
+      <Sheet open={isOffcanvasOpen} onOpenChange={setIsOffcanvasOpen}>
+        {/* Mobile Sheet Menu Content */}
+        <SheetContent
+          side="left"
+          className="w-[80vw] sm:w-80 bg-white p-0 z-[999]"
+        >
+          <SheetHeader className="border-b p-4">
+            <SheetTitle className="text-lg font-semibold text-gray-900">
+              Jewellery Wala Menu
+            </SheetTitle>
+          </SheetHeader>
+          {renderMobileNav()}
+        </SheetContent>
+      </Sheet>
+    </>
   );
 }
 

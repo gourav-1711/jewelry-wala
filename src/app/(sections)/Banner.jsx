@@ -12,8 +12,8 @@ import "swiper/css/pagination";
 export default function Banner({ data }) {
   return (
     <>
-      <div className="w-full h-[50vh] md:h-[70vh] relative overflow-hidden">
-        <div className="relative w-full h-full">
+      <div className="w-full h-[30vh] md:h-[50vh] lg:h-[70vh]  overflow-hidden">
+        <div className=" w-full h-full">
           <Swiper
             modules={[Navigation, Pagination, Autoplay]}
             spaceBetween={0}
@@ -34,15 +34,14 @@ export default function Banner({ data }) {
           >
             {data.map((banner, index) => (
               <SwiperSlide key={banner.id}>
-                <div className="w-full h-full relative">
+                <div className="w-full h-full">
                   <Image
                     src={banner.image}
                     alt={banner.title || "Jewellery Banner"}
-                    fill
-                    loading="lazy"
-                    className="object-cover object-center"
-                    sizes="100vw"
-                    quality={90}
+                    priority={true}
+                    width={1920}
+                    height={1080}
+                    className=" w-full h-full"
                   />
                 </div>
               </SwiperSlide>

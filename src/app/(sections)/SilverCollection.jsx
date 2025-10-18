@@ -127,22 +127,13 @@ export default function SilverCollection() {
       <div className="max-w-7xl mx-auto px-4 lg:pb-10">
         <Tabs defaultValue="silver" className="w-full">
           <TabsList className="grid w-fit grid-cols-3 bg-transparent border-b border-gray-200 h-auto p-0 rounded-none gap-0 mx-auto">
-            <TabsTrigger
-              value="silver"
-              className={Css()}
-            >
+            <TabsTrigger value="silver" className={Css()}>
               Silver
             </TabsTrigger>
-            <TabsTrigger
-              value="gold"
-              className={Css()}
-            >
+            <TabsTrigger value="gold" className={Css()}>
               Gold
             </TabsTrigger>
-            <TabsTrigger
-              value="gift"
-              className={Css()}
-            >
+            <TabsTrigger value="gift" className={Css()}>
               Gift
             </TabsTrigger>
           </TabsList>
@@ -161,9 +152,9 @@ export default function SilverCollection() {
 
           <TabsContent value="silver" className="m-0">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-              {products.silver.map((p , i) => (
-                <div data-aos="fade-up" data-aos-delay={i * 50} key={p.id}>
-                <ProductCard data-aos="zoom-in" key={p.id} {...p} />
+              {products.silver.map((p, i) => (
+                <div key={p.id}>
+                  <ProductCard key={p.id} {...p} />
                 </div>
               ))}
             </div>
@@ -171,9 +162,9 @@ export default function SilverCollection() {
 
           <TabsContent value="gold" className="m-0">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-              {products.gold.map((p , i) => (
-                <div data-aos="fade-up" data-aos-delay={i * 50} key={p.id}>
-                <ProductCard data-aos="zoom-in" key={p.id} {...p} />
+              {products.gold.map((p, i) => (
+                <div key={p.id}>
+                  <ProductCard key={p.id} {...p} />
                 </div>
               ))}
             </div>
@@ -181,16 +172,18 @@ export default function SilverCollection() {
 
           <TabsContent value="gift" className="m-0">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-              {products.gift.map((p , i) => (
-                <div data-aos="fade-up" data-aos-delay={i * 50} key={p.id}>
-                <ProductCard data-aos="zoom-in" key={p.id} {...p} />
+              {products.gift.map((p, i) => (
+                <div key={p.id}>
+                  <ProductCard key={p.id} {...p} />
                 </div>
               ))}
             </div>
           </TabsContent>
 
           <div className="flex justify-center mt-10 ">
-            <Button data-aos="fade-up" data-aos-delay={0} className="bg-gradient-to-r from-amber-500 to-yellow-500 text-gray-900 px-10 py-3 rounded-full font-semibold text-sm uppercase hover:shadow-lg hover:scale-105 transition-all">
+            <Button
+              className="bg-gradient-to-r from-amber-500 to-yellow-500 text-gray-900 px-10 py-3 rounded-full font-semibold text-sm uppercase hover:shadow-lg hover:scale-105 transition-all"
+            >
               View More
             </Button>
           </div>
@@ -201,7 +194,5 @@ export default function SilverCollection() {
 }
 
 const Css = () => {
-    return (
-        "px-6 pt-3 pb-[14px] font-bold text-base uppercase rounded-none border-transparent text-gray-500 hover:text-gray-700 transition-all bg-transparent data-[state=active]:text-amber-800 data-[state=active]:bg-clip-padding data-[state=active]:pb-3 data-[state=active]:shadow-none data-[state=active]:bg-gradient-to-r data-[state=active]:from-amber-700 data-[state=active]:via-orange-400 data-[state=active]:to-amber-700 data-[state=active]:[background-size:100%_3px] data-[state=active]:[background-repeat:no-repeat] [background-position:bottom] data-[state=active]:animate-in"
-    )
-}
+  return "px-6 pt-3 pb-[14px] font-bold text-base uppercase rounded-none border-transparent text-gray-500 hover:text-gray-700 transition-all bg-transparent data-[state=active]:text-amber-800 data-[state=active]:bg-clip-padding data-[state=active]:pb-3 data-[state=active]:shadow-none data-[state=active]:bg-gradient-to-r data-[state=active]:from-amber-700 data-[state=active]:via-orange-400 data-[state=active]:to-amber-700 data-[state=active]:[background-size:100%_3px] data-[state=active]:[background-repeat:no-repeat] [background-position:bottom] data-[state=active]:animate-in";
+};
